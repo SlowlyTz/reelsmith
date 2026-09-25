@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>video-gen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /*FONTS*/
+  @font-face { font-family: "IM Fell English"; src: url("../assets/fonts/IMFeENrm28P.ttf"); font-style: normal; }
+  @font-face { font-family: "IM Fell English"; src: url("../assets/fonts/IMFeENit28P.ttf"); font-style: italic; }
+  @font-face { font-family: "IM Fell English SC"; src: url("../assets/fonts/IMFeENsc28P.ttf"); }
+  @font-face { font-family: "Berkshire Swash"; src: url("../assets/fonts/BerkshireSwash-Regular.ttf"); }
+  @font-face { font-family: "UnifrakturMaguntia"; src: url("../assets/fonts/UnifrakturMaguntia-Book.ttf"); }
+  @font-face { font-family: "Caveat"; src: url("../assets/fonts/Caveat[wght].ttf"); font-weight: 400 700; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../assets/fonts/JetBrainsMono[wght].ttf"); font-weight: 100 800; }
+  @font-face { font-family: "Fredoka"; src: url("../assets/fonts/Fredoka[wdth,wght].ttf"); font-weight: 300 700; }
+  /*/FONTS*/
+  html, body { margin: 0; height: 100%; background: #0b0603; color: #f3e6cc; font-family: "IM Fell English", Georgia, serif; }
+  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+  canvas { max-width: 100vw; max-height: 100vh; width: auto; height: auto; display: block; }
+  #play { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    background: rgba(10, 5, 2, 0.55); cursor: pointer; font-size: 28px; border: 0; color: inherit; font-family: inherit; }
+  #play .big { font-family: "Berkshire Swash", serif; font-size: 64px; color: #e8c877; text-align: center; padding: 0 16px; }
+  #play.hidden { display: none; }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="c" width="1920" height="1080"></canvas></div>
+<button id="play" class="hidden"><span class="big" id="ptitle"></span><span>▶ Abspielen</span></button>
+<audio id="audio" preload="auto"></audio>
+<!--ENGINE-->
+<script src="core.js"></script>
+<script src="timeline.js"></script>
+<script src="styles/paper/paper.js"></script>
+<script src="styles/paper/puppet.js"></script>
+<script src="styles/paper/props.js"></script>
+<script src="styles/paper/frames/book.js"></script>
+<script src="styles/paper/frames/stage.js"></script>
+<script src="styles/paper/post.js"></script>
+<script src="runtime.js"></script>
+<script src="../audio/dsl.js"></script>
+<script src="../audio/mixer.js"></script>
+<!--/ENGINE-->
+<!--STORY-->
+<script>
+// Modes: ?story=<slug> [&format=9:16] [&mode=play|render|mix|still] [&t=12.5]
+(async function () {
+  const VG = window.VG, q = new URLSearchParams(location.search), mode = q.get('mode') || (q.has('t') ? 'still' : 'play');
+  const loadScript = (src) => new Promise((ok, fail) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => fail(new Error('cannot load ' + src)); document.head.appendChild(s); });
+  try {
+    let story = window.STORY, voice = window.VOICE;
+    const slug = q.get('story') || story?.slug;
+    if (!story) {
+      story = await (await fetch(`../stories/${slug}/story.json`)).json();
+      voice = await fetch(`../build/${slug}/voice/voice.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+      await loadScript(`../stories/${slug}/scenes.js`);
+      await loadScript(`../stories/${slug}/score.js`).catch(() => {});
+    }
+    story.slug = story.slug || slug;
+    if (q.get('format')) story.format = q.get('format');
+    const fams = ['20px "IM Fell English"', 'italic 20px "IM Fell English"', '20px "IM Fell English SC"', '20px "Berkshire Swash"', '20px UnifrakturMaguntia', '700 20px Caveat', '700 20px "JetBrains Mono"', '600 20px Fredoka'];
+    await Promise.all(fams.map((f) => document.fonts.load(f, 'AaÄäÖöÜüß…').catch(() => console.warn('font missing: ' + f))));
+    const T = VG.start(story, voice || {});
+    const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+    cv.width = VG.W; cv.height = VG.H;
+    for (let t = 0; t < T.end; t += 2.3) VG.render(ctx, t);   // warm-up: builds every cached shape
+    VG.ready = true;
+    if (mode === 'render' || mode === 'mix') return;
+    if (mode === 'still') return VG.render(ctx, parseFloat(q.get('t') || '0'));
+    const audio = document.getElementById('audio'), btn = document.getElementById('play');
+    audio.src = window.AUDIO_SRC || `../build/${story.slug}/soundtrack.m4a`;
+    document.getElementById('ptitle').textContent = story.title;
+    btn.classList.remove('hidden'); VG.render(ctx, 0);
+    btn.onclick = () => {
+      btn.classList.add('hidden'); audio.currentTime = 0; audio.play().catch(() => {});
+      const t0 = performance.now();
+      const loop = () => { const t = audio.paused || !isFinite(audio.duration) ? (performance.now() - t0) / 1000 : audio.currentTime;
+        VG.render(ctx, Math.min(t, T.end)); if (t < T.end) requestAnimationFrame(loop); else btn.classList.remove('hidden'); };
+      loop();
+    };
+  } catch (e) { window.VG_ERROR = String(e.stack || e); console.error(e); }
+})();
+</script>
+<!--/STORY-->
+</body>
+</html>

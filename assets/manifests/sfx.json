@@ -1,0 +1,467 @@
+{
+  "sampleRate": 48000,
+  "defaults": {
+    "highpassHz": [20],
+    "fadeInMs": 5,
+    "fadeOutMs": 20,
+    "peakDb": -3
+  },
+  "sounds": [
+    {
+      "file": "page_turn_1.wav",
+      "category": "page_turn",
+      "start": 0.035396,
+      "duration": 0.41575,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/397548/",
+        "url": "https://cdn.freesound.org/previews/397/397548_6142149-hq.mp3",
+        "sha256": "e0851119362e1dfd7a59b1bdb8ba0f75dbe98beb98a5448b7f61e631742e608f"
+      },
+      "author": "LilMati",
+      "original_title": "Page Turn 01",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Crisp single page turn; leading/trailing silence trimmed. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "page_turn_2.wav",
+      "category": "page_turn",
+      "start": 0,
+      "duration": 0.700604,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/397549/",
+        "url": "https://cdn.freesound.org/previews/397/397549_6142149-hq.mp3",
+        "sha256": "4630947e5c11083fbdac023d6edd3db8f10f8db8dad6a9a6cfcb2c1ccc0256a7"
+      },
+      "author": "LilMati",
+      "original_title": "Page Turn 02",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Slightly longer, airy page turn. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "page_turn_3.wav",
+      "category": "page_turn",
+      "start": 0.096187,
+      "duration": 1.581458,
+      "channels": 1,
+      "source": {
+        "page": "https://freesound.org/s/136778/",
+        "url": "https://cdn.freesound.org/previews/136/136778_2207512-hq.mp3",
+        "sha256": "bc0ff6820f91f8f161f6be5532c21377b54ddc07d5a8eb1eb3db5ef0055eb417"
+      },
+      "author": "davidbain",
+      "original_title": "Page Turn",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Fuller, slower page turn (~1.6s), mono. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "page_turn_4.wav",
+      "category": "page_turn",
+      "start": 0,
+      "duration": 0.384833,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/457767/",
+        "url": "https://cdn.freesound.org/previews/457/457767_9570326-hq.mp3",
+        "sha256": "128cb4fdef03f9037806f85afe1594dcd59d43a55b61a9371ec380c65c41f018"
+      },
+      "author": "partheeban",
+      "original_title": "turnPage.mp3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short quick flip with small second flutter. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "book_open.wav",
+      "category": "book_open",
+      "start": 0.019958,
+      "duration": 2.501,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/393844/",
+        "url": "https://cdn.freesound.org/previews/393/393844_3082984-hq.mp3",
+        "sha256": "a8476f437d8380d73ff42d89513144f24d714ab4cf18dd9dd30002c0b3323172"
+      },
+      "author": "envirOmaniac2",
+      "original_title": "Book_open.mp3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Cover handling/pages then soft landing thump near the end (~1.8s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "book_open_2.wav",
+      "category": "book_open",
+      "start": 0.062292,
+      "duration": 0.529146,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/614081/",
+        "url": "https://cdn.freesound.org/previews/614/614081_2476748-hq.mp3",
+        "sha256": "5a973db043d69e7d1c39f2f7161058b8ec299168381c594c7de1bc35befbe64d"
+      },
+      "author": "mateusboga",
+      "original_title": "Opening a book",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Alternative: short, soft paper-heavy book opening (no strong thump). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "book_close.wav",
+      "category": "book_close",
+      "start": 0.452229,
+      "duration": 0.515417,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/235588/",
+        "url": "https://cdn.freesound.org/previews/235/235588_3396115-hq.mp3",
+        "sha256": "dfdf51c465cad9a770a589e1854d2d95733f30ceb23d470d70a5e13f4fe9ed7b"
+      },
+      "author": "tcrocker68",
+      "original_title": "Book_Closing.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Soft hardcover close thump with short natural decay; trimmed to the thump. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "book_close_2.wav",
+      "category": "book_close",
+      "start": 0,
+      "duration": 0.230646,
+      "channels": 2,
+      "source": {
+        "page": "https://kenney.nl/assets/rpg-audio",
+        "url": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip",
+        "sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+        "zipEntry": "Audio/bookClose.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "RPG Audio pack: bookClose.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Alternative: short, tighter book close thump. Source: Kenney RPG Audio pack (OGG). Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_rustle_1.wav",
+      "category": "paper_rustle",
+      "start": 0.071875,
+      "duration": 1.057792,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/353125/",
+        "url": "https://cdn.freesound.org/previews/353/353125_1196020-hq.mp3",
+        "sha256": "fbf05bd9ba67a9df8eff656e813881c7f1a754d7473388785b228b0ed62dc564"
+      },
+      "author": "BenjaminNelan",
+      "original_title": "Paper Rustle",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Clean ~1s paper rustle, very low noise floor. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_rustle_2.wav",
+      "category": "paper_rustle",
+      "start": 0.215938,
+      "duration": 0.864083,
+      "channels": 1,
+      "source": {
+        "page": "https://freesound.org/s/211246/",
+        "url": "https://cdn.freesound.org/previews/211/211246_1506161-hq.mp3",
+        "sha256": "a621c04bbf56832c53b7e048a6bdb727cea51889f8dbbbd91c7b07962443c761"
+      },
+      "author": "Tomoyo Ichijouji",
+      "original_title": "PageRustle",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "First rustle of the source (0.2-1.08s), mono, subtle. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_rustle_3.wav",
+      "category": "paper_rustle",
+      "start": 0,
+      "duration": 1.618583,
+      "channels": 1,
+      "source": {
+        "page": "https://freesound.org/s/464302/",
+        "url": "https://cdn.freesound.org/previews/464/464302_775844-hq.mp3",
+        "sha256": "e0d672c802d714fd10f156355114faffa7e4698de5bd51bc567cf6434805ffa5"
+      },
+      "author": "eyesonlegs",
+      "original_title": "PaperSlide.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Paper sliding across a surface (~1.6s), mono; swells toward the end. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_rustle_4.wav",
+      "category": "paper_rustle",
+      "start": 0.097208,
+      "duration": 0.942813,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/371897/",
+        "url": "https://cdn.freesound.org/previews/371/371897_6512973-hq.mp3",
+        "sha256": "2b5bad03ac2981f1aed54a0e0664cc7ec97e76427bcd71feb6c788fb8018f88e"
+      },
+      "author": "Jofae",
+      "original_title": "Paper Crinkle",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Light crinkle, cut from 0.09-1.04s of source. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_pop_1.wav",
+      "category": "paper_pop",
+      "start": 0.235708,
+      "duration": 0.40525,
+      "channels": 1,
+      "source": {
+        "page": "https://freesound.org/s/178056/",
+        "url": "https://cdn.freesound.org/previews/178/178056_2103700-hq.mp3",
+        "sha256": "49f36d6684261767455f028c8b5321cb084d20677f2c5e77eb05b5b6fc2fe263"
+      },
+      "author": "Eneasz",
+      "original_title": "folder snapped shut.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Crisp soft paper/card 'pop' (folder snap), mono; best pop-up candidate. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_pop_2.wav",
+      "category": "paper_pop",
+      "start": 0.163062,
+      "duration": 0.486958,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/364740/",
+        "url": "https://cdn.freesound.org/previews/364/364740_4067257-hq.mp3",
+        "sha256": "f7ee56b36e21a80a3420db8c11330b86c0cf0b350d5f94ec0e1e85d15920b201"
+      },
+      "author": "newagesoup",
+      "original_title": "open-cardboard-box-compartment.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Cardboard flap pop followed by short paper rustle. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_pop_3.wav",
+      "category": "paper_pop",
+      "start": 0,
+      "duration": 0.252521,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/388647/",
+        "url": "https://cdn.freesound.org/previews/388/388647_14360-hq.mp3",
+        "sha256": "44e6d1741cb051cef2478265d714b9315fe607a91080bcf7b85f1b29aaa3d922"
+      },
+      "author": "totalcult",
+      "original_title": "Box 02.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short cardboard tap/thud (0.25s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_pop_4.wav",
+      "category": "paper_pop",
+      "start": 0.049979,
+      "duration": 1.000042,
+      "channels": 2,
+      "source": {
+        "page": "https://freesound.org/s/459439/",
+        "url": "https://cdn.freesound.org/previews/459/459439_5324256-hq.mp3",
+        "sha256": "e9ab360225403f9b026bdbeca661166e3e4b2952302962ab1e6cf6ae338adce7"
+      },
+      "author": "Coral_Island_Studios",
+      "original_title": "14 Cardboard Flap.mp3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Cardboard flap swish (~1s) - first flap of source; good for an element unfolding. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "waves_soft_1.wav",
+      "category": "waves_soft",
+      "start": 28,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/578524/",
+        "url": "https://cdn.freesound.org/previews/578/578524_5487341-hq.mp3",
+        "sha256": "fd505dbd43cb1c3508f884279bf5d3e060bb14f2bc3d9b4cce334eb7a75b5d7f"
+      },
+      "author": "SamsterBirdies",
+      "original_title": "Calm ocean waves",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (28-58s) of calm, rhythmic wave swells. Fades 1s in / 1.5s out. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "waves_soft_2.wav",
+      "category": "waves_soft",
+      "start": 55,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/352356/",
+        "url": "https://cdn.freesound.org/previews/352/352356_2309965-hq.mp3",
+        "sha256": "768a4f8b84223ee73fb9435e19e48ee6653413b836393327136b9334258ed006"
+      },
+      "author": "Alex_hears_things",
+      "original_title": "Gentle small waves lapping on shore.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (55-85s), quieter lapping on shore; one louder splash at ~26s sets the peak. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "forest_ambience_1.wav",
+      "category": "forest_ambience",
+      "start": 40,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/385280/",
+        "url": "https://cdn.freesound.org/previews/385/385280_2341984-hq.mp3",
+        "sha256": "08a3514a9a36b96173cb831cf8602ffa7eb9553c564cd48e96ac56552a175d38"
+      },
+      "author": "bajko",
+      "original_title": "sfx_amb_forest_spring_afternoon-01.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (40-70s): soft spring forest birds, no low rumble. Boosted +23 dB by normalization. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "forest_ambience_2.wav",
+      "category": "forest_ambience",
+      "start": 30,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/463903/",
+        "url": "https://cdn.freesound.org/previews/463/463903_7241289-hq.mp3",
+        "sha256": "adc8c6593029d316b8954500f67193a00aba2a626bff45a808a07798ce6136c2"
+      },
+      "author": "BurghRecords",
+      "original_title": "Birds In Spring (Scotland)",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (30-60s): denser birdsong, fuller background. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "night_ambience_1.wav",
+      "category": "night_ambience",
+      "start": 5,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/175020/",
+        "url": "https://cdn.freesound.org/previews/175/175020_2979997-hq.mp3",
+        "sha256": "18da78264ed2ff12e74d1bc6ac17ce539a12568fd04a32c830f117fed31da8ea"
+      },
+      "author": "sengjinn",
+      "original_title": "AMBIENCE NIGHT FIELD CRICKET 01.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (5-35s): steady field crickets. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "night_ambience_2.wav",
+      "category": "night_ambience",
+      "start": 40,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "highpassHz": [20, 120],
+      "source": {
+        "page": "https://freesound.org/s/333221/",
+        "url": "https://cdn.freesound.org/previews/333/333221_2098408-hq.mp3",
+        "sha256": "7429a4e5b023514f9d9ec313d0ec3d3304e69525b1d3689378d9809d4635128a"
+      },
+      "author": "hdfreema",
+      "original_title": "Night Crickets Back Porch.aiff",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (40-70s), 120 Hz highpass to remove low rumble; quiet source (+35 dB). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "city_distant_1.wav",
+      "category": "city_distant",
+      "start": 60,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/426894/",
+        "url": "https://cdn.freesound.org/previews/426/426894_1266177-hq.mp3",
+        "sha256": "5057817f78d70dbb2675f4d512e0790e59162d3acf9f627588658fb4912b4ec3"
+      },
+      "author": "danner",
+      "original_title": "Ambience_Berlin_Rooftop.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (60-90s) of a Berlin rooftop: distant, soft city hum. Quiet source (+35 dB). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "city_distant_2.wav",
+      "category": "city_distant",
+      "start": 70,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/567695/",
+        "url": "https://cdn.freesound.org/previews/567/567695_1808988-hq.mp3",
+        "sha256": "f45c4b7aedaa9a5199ff605a9c0cddf4300eca657b5f0db0cd3802a78bd5c594"
+      },
+      "author": "Sotiris_Laskaris",
+      "original_title": "City Terrace Night 3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (70-100s): night city from a terrace, slightly busier. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "typing_soft_1.wav",
+      "category": "typing_soft",
+      "start": 36.5,
+      "duration": 6,
+      "channels": 1,
+      "fadeInMs": 20,
+      "fadeOutMs": 250,
+      "source": {
+        "page": "https://freesound.org/s/565645/",
+        "url": "https://cdn.freesound.org/previews/565/565645_6652872-hq.mp3",
+        "sha256": "83423e46d3ba602474a758aa768272174e0e3e100f1febdad753b8c99841e916"
+      },
+      "author": "khenshom",
+      "original_title": "Computer keyboard typing and keystrokes - Apple MacBook Pro 2018",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "6s excerpt (36.5-42.5s) of MacBook laptop typing, mono, very clean. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "typing_soft_2.wav",
+      "category": "typing_soft",
+      "start": 0.42,
+      "duration": 6.4,
+      "channels": 2,
+      "fadeInMs": 20,
+      "fadeOutMs": 250,
+      "source": {
+        "page": "https://freesound.org/s/394945/",
+        "url": "https://cdn.freesound.org/previews/394/394945_7320040-hq.mp3",
+        "sha256": "7dcc00ba97a18ba83de1267f119e597753f87b5743680be2fa58ad2b880cfd3a"
+      },
+      "author": "Areti18",
+      "original_title": "Keyboard",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "6.4s of soft keyboard typing (whole clip minus lead-in). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "wind_soft_1.wav",
+      "category": "wind_soft",
+      "start": 18,
+      "duration": 30,
+      "channels": 2,
+      "fadeInMs": 1000,
+      "fadeOutMs": 1500,
+      "source": {
+        "page": "https://freesound.org/s/135193/",
+        "url": "https://cdn.freesound.org/previews/135/135193_1661766-hq.mp3",
+        "sha256": "89ab6697662e41540a14c63d00322fa9cdf2d42ff0797d3782d836307506e0e7"
+      },
+      "author": "felix.blume",
+      "original_title": "Wind blowing in the bush on the top of Kitt Peak mountain. (USA, Arizona)",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "30s excerpt (18-48s): gentle mountain wind through bushes, no mic buffeting. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    }
+  ]
+}

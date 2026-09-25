@@ -1,0 +1,26 @@
+{
+  "name": "video-gen",
+  "version": "0.1.0",
+  "description": "Prompt-to-video pipeline for narrated paper-craft stop-motion films (pure JavaScript animation, local TTS, sampled orchestra).",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "setup": "bash tools/setup.sh",
+    "fetch-assets": "node tools/fetch-assets.mjs",
+    "new": "node tools/new.mjs",
+    "voice": "node tools/voice.mjs",
+    "cast": "node tools/cast.mjs",
+    "timeline": "node tools/timeline.mjs",
+    "snap": "node tools/snap.mjs",
+    "mix": "node tools/mix.mjs",
+    "render": "node tools/render.mjs",
+    "sheet": "node tools/sheet.mjs",
+    "html": "node tools/html.mjs",
+    "video": "node tools/video.mjs",
+    "play": "node tools/play.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.0.0"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "source": "Google Fonts repository (https://github.com/google/fonts), pinned commit",
+  "baseUrl": "https://raw.githubusercontent.com/google/fonts/23e54b51ddffbc7713c583748e3bd86f62b1fa4a/ofl/",
+  "license": "SIL Open Font License 1.1 (https://openfontlicense.org)",
+  "fonts": [
+    {
+      "file": "IMFeENrm28P.ttf",
+      "src": "imfellenglish/IMFeENrm28P.ttf",
+      "family": "IM Fell English Roman",
+      "designer": "Igino Marini",
+      "copyright": "Copyright (c) 2010, Igino Marini (mail@iginomarini.com)",
+      "sha256": "fe9705bbde51af802719246d4608d08d37bde956ab99d9a590da996a5221a24c"
+    },
+    {
+      "file": "IMFeENit28P.ttf",
+      "src": "imfellenglish/IMFeENit28P.ttf",
+      "family": "IM Fell English Italic",
+      "designer": "Igino Marini",
+      "copyright": "Copyright (c) 2010, Igino Marini (mail@iginomarini.com)",
+      "sha256": "47cd75dce54b1f2e0831359d22d5e688f519d68ae45706b664fd310fd0e3ccf7"
+    },
+    {
+      "file": "IMFeENsc28P.ttf",
+      "src": "imfellenglishsc/IMFeENsc28P.ttf",
+      "family": "IM Fell English SC",
+      "designer": "Igino Marini",
+      "copyright": "Copyright (c) 2010, Igino Marini (mail@iginomarini.com)",
+      "sha256": "102324fb5434bb5da7963533426b0ad44c85bbc9e7755067535c9d11464a176b"
+    },
+    {
+      "file": "BerkshireSwash-Regular.ttf",
+      "src": "berkshireswash/BerkshireSwash-Regular.ttf",
+      "family": "Berkshire Swash",
+      "designer": "Astigmatic",
+      "copyright": "Copyright (c) 2012 by Brian J. Bonislawsky DBA Astigmatic (AOETI), with Reserved Font Names \"Berkshire Swash\"",
+      "sha256": "f0c80837dc6f32b89b10894a7e39295db4a00ab697cada682a3f5942c342fe00"
+    },
+    {
+      "file": "UnifrakturMaguntia-Book.ttf",
+      "src": "unifrakturmaguntia/UnifrakturMaguntia-Book.ttf",
+      "family": "UnifrakturMaguntia",
+      "designer": "j. mach wust",
+      "copyright": "Copyright (c) 2010, j. mach wust, with Reserved Font Name UnifrakturMaguntia. Copyright (c) 2009, Peter Wiegel.",
+      "sha256": "d64afc0547059dd2e4a78da48bda0aba0a9901be58c7f8c201a8b2b6b4492cc8"
+    },
+    {
+      "file": "Caveat[wght].ttf",
+      "src": "caveat/Caveat[wght].ttf",
+      "family": "Caveat (variable, wght)",
+      "designer": "Impallari Type",
+      "copyright": "Copyright 2014 The Caveat Project Authors (https://github.com/googlefonts/caveat)",
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988"
+    },
+    {
+      "file": "JetBrainsMono[wght].ttf",
+      "src": "jetbrainsmono/JetBrainsMono[wght].ttf",
+      "family": "JetBrains Mono (variable, wght)",
+      "designer": "JetBrains, Philipp Nurullin, Konstantin Bulenkov",
+      "copyright": "Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)",
+      "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda"
+    },
+    {
+      "file": "Fredoka[wdth,wght].ttf",
+      "src": "fredoka/Fredoka[wdth,wght].ttf",
+      "family": "Fredoka (variable, wdth + wght)",
+      "designer": "Milena Brandão, Hafontia",
+      "copyright": "Copyright 2016 The Fredoka Project Authors (https://github.com/hafontia/Fredoka-One)",
+      "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8"
+    }
+  ]
+}

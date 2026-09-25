@@ -1,0 +1,27 @@
+{
+  "title": "Lina und die Sterne",
+  "lang": "de",
+  "style": "paper",
+  "frame": "book",
+  "formats": ["16:9", "9:16"],
+  "fps": 24,
+  "animFps": 12,
+  "music": { "bpm": 100, "beatsPerBar": 3, "key": "F" },
+  "voice": { "engine": "piper", "model": "de_DE-thorsten-high", "lengthScale": 1.12 },
+  "book": { "cover": { "title": "Lina und die Sterne", "subtitle": "Ein Märchen aus Papier", "color": "#2d4d66", "emblem": "moon" } },
+  "intro": { "bars": 1 },
+  "outro": { "bars": 3, "sticker": "heart" },
+  "cast": {
+    "lina": { "hair": "ponytail", "hairColor": "#7b4527", "skin": "#f4caa6", "outfit": "dress", "top": "#e98a86", "shoes": "#8e3a3e", "lashes": true }
+  },
+  "scenes": [
+    { "id": "anfang", "bars": 3 },
+    { "id": "wald", "bars": 5 },
+    { "id": "nacht", "bars": 5 }
+  ],
+  "lines": [
+    { "id": "vo1", "scene": "anfang", "at": 0.3, "text": "Es war einmal …", "tts": "Es war einmal …" },
+    { "id": "vo2", "scene": "wald", "at": 0.2, "text": "… ein Mädchen namens Lina, das durch einen Wald aus Papier spazierte.", "tts": "ein Mädchen namens Lina, das durch einen Wald aus Papier spazierte." },
+    { "id": "vo3", "scene": "nacht", "at": 0.3, "text": "Und als die Sterne erwachten, leuchtete der Himmel nur für sie.", "tts": "Und als die Sterne erwachten, leuchtete der Himmel nur für sie." }
+  ]
+}

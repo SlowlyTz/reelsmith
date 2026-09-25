@@ -1,0 +1,18 @@
+# generated videos, frames, review sheets, narration
+build/*
+!build/.gitkeep
+
+# downloaded / processed assets (npm run fetch-assets)
+assets/samples/
+assets/sfx/
+assets/fonts/
+assets/.cache/
+
+# local toolchain and model caches (npm run setup)
+node_modules/
+.venv/
+.tools/
+.cache/
+
+.DS_Store
+*.log
