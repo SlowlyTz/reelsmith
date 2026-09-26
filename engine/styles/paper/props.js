@@ -163,6 +163,41 @@
     VG.text(c, text, 0, 14, opt.font || '44px "Berkshire Swash"', opt.ink || '#8e2f36');
   }, id);
 
+  // ---------- paper typography ----------
+  // Headline made of individually cut paper letters that pop in one after another.
+  // opt: { font, colors: [..], k0 (appear time), stagger, fold, t, id, depth, align }
+  VG.cutoutText = (ctx, str, x, y, size, opt = {}) => {
+    const font = opt.font || `700 ${size}px "Fredoka"`, cols = opt.colors || ['#e0565f', '#f2c14e', '#3d8fb0', '#6aa84f', '#b875d1'];
+    const t = opt.t ?? VG.time, fold = opt.fold ?? 1, s = VG.scaleOf(ctx);
+    ctx.save(); ctx.font = font;
+    const widths = [...str].map((c) => ctx.measureText(c).width + size * 0.06), total = widths.reduce((a, b) => a + b, 0);
+    let cx = opt.align === 'left' ? x : x - total / 2;
+    [...str].forEach((ch, i) => {
+      const w = widths[i], k = VG.popK(t, (opt.k0 ?? 0) + i * (opt.stagger ?? 0.05), 0.35) * fold;
+      if (ch !== ' ' && k > 0) {
+        const id = (opt.id || str) + i, j = VG.jit(id, 1.2), rot = (VG.hash(VG.strSeed(id), 9) - 0.5) * 0.16;
+        ctx.save(); ctx.translate(cx + w / 2 + j.x, y + j.y); ctx.rotate(rot + j.r * 3); ctx.scale(k, k);
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.shadowColor = VG.light.col; ctx.shadowBlur = 8 * s; ctx.shadowOffsetX = 2.5 * s; ctx.shadowOffsetY = 4.5 * s;
+        ctx.lineJoin = 'round'; ctx.lineWidth = size * 0.16; ctx.strokeStyle = VG.paper('#fbf6ea', true); ctx.strokeText(ch, 0, 0);
+        ctx.shadowColor = 'transparent'; ctx.fillStyle = VG.paper(cols[i % cols.length]); ctx.fillText(ch, 0, 0);
+        ctx.restore();
+      }
+      cx += w;
+    });
+    ctx.restore();
+  };
+  // Paper note with washi tape and (multi-line) handwritten or printed text.
+  VG.paperNote = (ctx, x, y, w, h, lines, opt = {}) => VG.pop(ctx, x, y + h / 2, opt.k ?? 1, (c) => {
+    c.translate(0, -h / 2); c.rotate(opt.rot ?? -0.03);
+    VG.piece(c, S(`note${w}x${h}`, () => G.rrect(-w / 2, -h / 2, w, h, 6)), opt.color || '#fbf3df', 1.4);
+    c.save(); c.globalAlpha = 0.72;
+    for (const [tx, ty, r] of [[-w / 2 + 10, -h / 2 + 4, -0.6], [w / 2 - 10, h / 2 - 4, -0.6]]) { c.save(); c.translate(tx, ty); c.rotate(r); VG.piece(c, S('tape', () => G.rrect(-44, -13, 88, 26, 1)), opt.tape || '#e9a3a8', 0.3, { edge: false }); c.restore(); }
+    c.restore();
+    const size = opt.size || 44, lh = size * 1.2, y0 = -((lines.length - 1) * lh) / 2 + size * 0.35;
+    lines.forEach((l, i) => VG.text(c, l, 0, y0 + i * lh, opt.font || `600 ${size}px Caveat`, opt.ink || '#3b2a1c'));
+  }, opt.id || 'note' + w);
+
   // ---------- water ----------
   // layered paper waves; `between(i)` is called before layer i is drawn (to tuck boats between waves)
   VG.waves = (ctx, key, t, x0, x1, tops, colors, k = (i) => 1, between = null) => {

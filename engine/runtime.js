@@ -75,6 +75,29 @@
     return VG.frameImpl.clampCam(c, VG.W, VG.H, t);
   };
 
+  // Optional subtitles (story.subtitles = true): the current narration line on a paper strip,
+  // words appearing as they are spoken. Drawn in screen space so every format stays readable.
+  function subtitles(ctx, t) {
+    const T = VG.T, line = Object.values(T.lines).find((l) => t >= l.start - 0.1 && t <= l.speechEnd + 0.6);
+    if (!line) return;
+    const def = VG.story.lines.find((x) => x.id === line.id), words = def.text.replace(/^…\s*/, '').split(/\s+/);
+    const W = VG.W, H = VG.H, size = Math.round(Math.min(W, H) * 0.044), maxW = W * 0.82;
+    ctx.save(); ctx.font = `600 ${size}px Fredoka`;
+    const rows = [[]]; let rowW = 0;
+    for (const w of words) { const ww = ctx.measureText(w + ' ').width; if (rowW + ww > maxW && rows[rows.length - 1].length) { rows.push([]); rowW = 0; } rows[rows.length - 1].push(w); rowW += ww; }
+    const n = line.words.length, at = (i) => (n ? line.words[Math.min(n - 1, Math.floor((i * n) / words.length))][1] : line.start);
+    const lh = size * 1.3, boxH = rows.length * lh + size * 0.7, boxW = Math.max(...rows.map((r) => ctx.measureText(r.join(' ')).width)) + size * 1.4;
+    const cy = H * (H > W ? 0.8 : 0.86), fade = win(t, line.start - 0.1, 0.25) * (1 - win(t, line.speechEnd + 0.35, 0.25));
+    ctx.globalAlpha = fade; ctx.translate(W / 2, cy); ctx.rotate(-0.006);
+    VG.piece(ctx, VG.S(`sub${Math.round(boxW)}x${Math.round(boxH)}`, () => VG.G.rrect(-boxW / 2, -boxH / 2, boxW, boxH, 8), 0.8), '#fbf3df', 1.5);
+    let i = 0;
+    rows.forEach((r, ri) => {
+      let x = -ctx.measureText(r.join(' ')).width / 2; const y = -boxH / 2 + size * 0.35 + lh * ri + size * 0.95;
+      for (const w of r) { const a = win(t, at(i++) - 0.05, 0.12); ctx.fillStyle = VG.rgba('#3b2a1c', 0.25 + 0.75 * a); ctx.textAlign = 'left'; ctx.fillText(w, x, y); x += ctx.measureText(w + ' ').width; }
+    });
+    ctx.restore();
+  }
+
   VG.render = (ctx, t) => {
     const T = VG.T, a = T.animFps;
     const tq = Math.floor(t * a + 1e-6) / a;  // puppets & pop-ups move on twos
@@ -86,6 +109,7 @@
     VG.frameImpl.draw(ctx, t, tq, clamp(cam.z, 1, 1.7));
     if (VG.frameImpl.overlay) VG.frameImpl.overlay(ctx, t);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (VG.story.subtitles) subtitles(ctx, t);
     VG.post(ctx, t, VG.W, VG.H, T);
   };
 })();

@@ -43,9 +43,11 @@
     };
     // sticker over the last scene at the end
     R.overlay = (ctx, t) => {
-      const O = T.outro; if (!O.sticker || t < O.closeStart) return;
+      const O = T.outro; if ((!O.sticker && !story.outro?.text) || t < O.closeStart) return;
       ctx.save(); ctx.fillStyle = `rgba(15,8,4,${0.45 * ease.inOut(win(t, O.closeStart, O.closeDur))})`; ctx.fillRect(-W, -H, W * 2, H * 2); ctx.restore();
-      VG.drawSticker(ctx, O.sticker, 0, -H * 0.04, VG.time - O.stickerAt, Math.min(W, H) / 1080 * 1.3);
+      const sc = Math.min(W, H) / 1080;
+      if (O.sticker) VG.drawSticker(ctx, O.sticker, 0, -H * 0.04, VG.time - O.stickerAt, sc * 1.3);
+      if (story.outro?.text) VG.cutoutText(ctx, story.outro.text, 0, H * 0.04 + 210 * sc, Math.round(96 * sc), { k0: O.stickerAt + 0.5, t: VG.time, id: 'outro' });
     };
     return R;
   };

@@ -10,7 +10,7 @@ const { story, voice, p } = loadStory(slug);
 const format = a.format || story.formats[0];
 const { T } = timeline(story, voice);
 let times = a._.slice(1).map(Number);
-if (!times.length) times = [0.5, T.intro.openStart + T.intro.openDur * 0.5, ...T.scenes.flatMap((s) => [s.openAt + 0.8, (s.openAt + s.exitAt) / 2, s.exitAt - 0.3]), T.outro.stickerAt + 1];
+if (!times.length) times = [...(T.frame === 'book' ? [0.5, T.intro.openStart + T.intro.openDur * 0.5] : []), ...T.scenes.flatMap((s) => [s.openAt + 0.8, (s.openAt + s.exitAt) / 2, s.exitAt - 0.3]), T.outro.stickerAt + 1.2];
 const dir = join(p.review, 'snaps' + fmtTag(format));
 if (!a._.slice(1).length) rmSync(dir, { recursive: true, force: true });
 ensureDir(dir);

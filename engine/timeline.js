@@ -25,7 +25,7 @@
     });
     const outroStart = t, closeDur = frame === 'book' ? 1.25 : 0.9;
     T.outro = { start: outroStart, closeStart: outroStart, closeDur,
-      sticker: story.outro?.sticker ?? 'heart',
+      sticker: story.outro?.sticker !== undefined ? story.outro.sticker : frame === 'book' ? 'heart' : null,
       stickerAt: outroStart + Math.ceil((closeDur + 0.4) / bar) * bar,
       fadeDur: 1.4, end: outroStart + outroBars * bar };
     T.outro.fadeStart = T.outro.end - T.outro.fadeDur - 0.1;
