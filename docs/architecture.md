@@ -4,7 +4,7 @@
 
 ```
 stories/<slug>/story.json ─┐
-build/<slug>/voice/voice.json ─┼─► engine/timeline.js ──► T (absolute timeline)
+build/_<slug>/voice/voice.json ─┼─► engine/timeline.js ──► T (absolute timeline)
                                │
 stories/<slug>/scenes.js ──────┼─► engine/runtime.js ──► frame (book | stage) ──► post ──► canvas
 stories/<slug>/score.js ───────┴─► audio/dsl.js ──► audio/mixer.js (OfflineAudioContext) ──► soundtrack.wav
@@ -27,7 +27,7 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 | `engine/styles/paper/frames/book.js` | storybook: table, cover, page stacks, curled page turns, camera limits |
 | `engine/styles/paper/frames/stage.js` | full-bleed paper stage, sliding-sheet transitions |
 | `engine/styles/paper/post.js` | lamp grade, vignette, exposure flicker, film grain, fades |
-| `engine/page.html` | loads everything; modes `play`, `render`, `mix`, `still` |
+| `engine/page.html` + `page.css` | loads everything; modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
 | `audio/dsl.js` | score language (`VG.scoreDSL(T)`, `VG.chord`, `VG.note`) |
 | `audio/mixer.js` | offline mix: samples, narration + ducking, sfx, reverb, master |
 | `tools/lib/common.mjs` | paths, story loading, static server (+ `/upload/`), Chromium launch, frame grab |

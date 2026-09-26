@@ -1,6 +1,6 @@
 # Quality checklist
 
-Run through this before delivering. Look at the images yourself (`build/<slug>/review/*.jpg`).
+Run through this before delivering. Look at the images yourself (`build/_<slug>/review/*.jpg`).
 
 ## Content
 - [ ] Names, dates, places exactly as in the prompt – in narration transcripts **and** on-screen text.

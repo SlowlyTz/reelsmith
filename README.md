@@ -7,7 +7,7 @@ Local & offline: JS canvas animation, neural voice, sampled orchestra. No API ke
 ```
 /make-video A 9:16 birthday greeting for Tom: paper confetti, his name in cut-out letters …
 ```
-→ `build/<slug>/<slug>.mp4` (16:9) · `<slug>_9x16.mp4` (9:16) · `<slug>.html`
+→ `build/_<slug>/<slug>.mp4` (16:9) · `<slug>_9x16.mp4` (9:16) · `<slug>.html`
 
 ---
 
@@ -40,7 +40,7 @@ Node ≥ 20 · ffmpeg · Chromium/Chrome · Linux or macOS
 | Path | What |
 |---|---|
 | `stories/<slug>/` | your film: `story.json`, `scenes.js`, `score.js` |
-| `build/<slug>/` | output videos, html, soundtrack, review images |
+| `build/_<slug>/` | everything per video: mp4, html + web/ (css/js), audio, voice, review |
 | `engine/` · `audio/` · `tools/` | the machine |
 | `docs/` | how it works (written for agents) |
 | `AGENTS.md` | the step-by-step workflow for an AI agent |

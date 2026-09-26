@@ -1,7 +1,7 @@
 // Video: npm run render -- <slug> [--format 16:9|9:16] [--workers 4] [--range 10-20] [--keep-frames]
 // Renders every frame with parallel headless Chromium workers and encodes H.264 + the soundtrack
-// -> build/<slug>/<slug>.mp4 (16:9) or <slug>_9x16.mp4. --range renders only those seconds (for checks).
-import { writeFileSync, rmSync, existsSync } from 'node:fs';
+// -> build/_<slug>/<slug>.mp4 (16:9) or <slug>_9x16.mp4. --range renders only those seconds (for checks).
+import { writeFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { cpus } from 'node:os';
 import { loadStory, timeline, serve, browser, openStory, grab, ensureDir, run, args, fmtTag } from './lib/common.mjs';
@@ -32,7 +32,7 @@ for (const format of formats) {
   srv.close();
   console.log(`${format}: ${frames.length} frames in ${((Date.now() - t0) / 1000).toFixed(0)}s`);
   if (range) { console.log(`frames in ${dir}`); continue; }
-  const out = join(p.build, `${slug}${fmtTag(format)}.mp4`), audio = join(p.build, 'soundtrack.wav');
+  const out = join(p.build, `${slug}${fmtTag(format)}.mp4`), audio = join(p.audio, 'soundtrack.wav');
   const inputs = ['-framerate', String(fps), '-i', join(dir, 'f%05d.png')];
   if (existsSync(audio)) inputs.push('-i', audio); else console.warn('no soundtrack yet (npm run mix) – encoding a silent video');
   run('ffmpeg', ['-v', 'error', '-y', ...inputs, '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-tune', 'film', '-pix_fmt', 'yuv420p',
@@ -40,3 +40,4 @@ for (const format of formats) {
   if (!a['keep-frames']) rmSync(dir, { recursive: true, force: true });
   console.log('video:', out);
 }
+if (existsSync(p.frames) && !readdirSync(p.frames).length) rmSync(p.frames, { recursive: true });

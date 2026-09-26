@@ -1,6 +1,6 @@
 // Narration: npm run voice -- <slug> [--only vo2,vo3]
 // Generates every line of story.json with Piper or XTTS (story.voice.engine), masters it and
-// measures word timings with Whisper -> build/<slug>/voice/<id>.wav + voice.json.
+// measures word timings with Whisper -> build/_<slug>/voice/<id>.wav + voice.json.
 // Always read the report: a low "sim" means the transcript differs from the text (mispronounced
 // or garbled word) – fix the line's "tts" spelling and regenerate just that line with --only.
 import { existsSync, writeFileSync } from 'node:fs';

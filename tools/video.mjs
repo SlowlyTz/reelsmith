@@ -1,8 +1,9 @@
 // Everything in one go: npm run video -- <slug> [--revoice] [--format 16:9] [--force]
-// voice (if missing) -> fit check -> soundtrack -> video per format -> standalone HTML -> contact sheets.
+// voice (if missing) -> fit check -> soundtrack -> video per format -> players (html + web/) -> contact sheets.
+// Everything lands in build/_<slug>/.
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { ROOT, loadStory, timeline, args, fmtTag } from './lib/common.mjs';
+import { ROOT, loadStory, timeline, args, fmtTag, buildDir } from './lib/common.mjs';
 
 const a = args(), slug = a._[0];
 if (!slug) { console.error('usage: npm run video -- <slug> [--revoice] [--format 16:9|9:16] [--force]'); process.exit(1); }
@@ -15,6 +16,7 @@ if (r.problems.length && !a.force) { console.error('\nnarration does not fit:\n-
 step('mix');
 const formats = a.format ? [a.format] : story.formats;
 for (const f of formats) { step('render', '--format', f); step('html', '--format', f); step('sheet', '--format', f); }
-console.log('\nDONE:');
-for (const f of formats) console.log(`  build/${slug}/${slug}${fmtTag(f)}.mp4   build/${slug}/${slug}${fmtTag(f)}.html`);
-console.log(`  review sheets: build/${slug}/review/  (${T.end.toFixed(1)} s)`);
+const dir = `build/${buildDir(slug)}`;
+console.log(`\nDONE – everything is in ${dir}/ (${T.end.toFixed(1)} s):`);
+for (const f of formats) console.log(`  ${dir}/${slug}${fmtTag(f)}.mp4   ${dir}/${slug}${fmtTag(f)}.html`);
+console.log(`  ${dir}/web/  ${dir}/audio/  ${dir}/voice/  ${dir}/review/`);

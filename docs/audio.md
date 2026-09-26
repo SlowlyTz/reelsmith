@@ -2,7 +2,7 @@
 
 ## Narration (`npm run voice -- <slug>`)
 
-Pipeline per line: engine → `build/<slug>/voice/raw/<id>.wav` → mastering (48 kHz, high-pass 75 Hz,
+Pipeline per line: engine → `build/_<slug>/voice/raw/<id>.wav` → mastering (48 kHz, high-pass 75 Hz,
 +`warmth` dB at 200 Hz, −1.5 dB at 3.4 kHz, −2.2 dB at 8 kHz, gentle compression, −19 LUFS) →
 `voice/<id>.wav` → Whisper word timestamps → `voice/voice.json`
 (`dur`, `speechEnd`, `words`, `transcript`, `sim`, `phonemes`).

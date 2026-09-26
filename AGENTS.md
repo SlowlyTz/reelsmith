@@ -4,7 +4,7 @@ reelsmith turns a prompt ("a video for X, in which Y happens") into a **paper-cr
 video of any kind**: stories and fairytales, birthday/anniversary greetings, invitations,
 explainers, product or brand clips, trip recaps, social posts. Hand-cut paper pieces with cast
 shadows, pop-ups, puppets moving on twos, paper typography, optional narration, sampled music and
-real paper foley – all rendered as a pure JavaScript canvas animation into `build/<slug>/`.
+real paper foley – all rendered as a pure JavaScript canvas animation into `build/_<slug>/`.
 
 Work autonomously: the user wants a finished, reviewed video, not a draft.
 Quality bar: professional and handmade, in the tone the prompt asks for (cute, festive, calm, punchy …).
@@ -74,7 +74,7 @@ loanwords and every number/date in the transcript. Details: [docs/audio.md](docs
 
 ```
 npm run timeline -- <slug>                       # all lines must fit
-npm run snap -- <slug> --sheet [--format 9:16]   # stills → build/<slug>/review/ – LOOK at them
+npm run snap -- <slug> --sheet [--format 9:16]   # stills → build/_<slug>/review/ – LOOK at them
 npm run mix -- <slug> --stems                    # voice ~10–14 LU above music, ≈ -16 LUFS
 ```
 
@@ -83,9 +83,26 @@ npm run mix -- <slug> --stems                    # voice ~10–14 LU above music
 ```
 npm run video -- <slug>        # mix → render all formats → html → review sheets
 ```
-Review `build/<slug>/review/video_sheet*` with [docs/quality.md](docs/quality.md); fix and re-render.
-Deliver `build/<slug>/<slug>.mp4`, `<slug>_9x16.mp4`, `<slug>.html`. Report: what the video shows,
+Review `build/_<slug>/review/video_sheet*` with [docs/quality.md](docs/quality.md); fix and re-render.
+Deliver `build/_<slug>/<slug>.mp4`, `<slug>_9x16.mp4`, `<slug>.html`. Report: what the video shows,
 decisions from step 1, voice, duration, paths, and what you could not verify (you cannot listen).
+
+## Build output (mandatory)
+
+Every video gets exactly one folder **`build/_<slug>/`** – an underscore plus a short name that fits the
+video (the kebab-case slug, e.g. `build/_oma-80/`). Everything belonging to that video goes there and
+nowhere else; the tools already write this layout, never move files out of it:
+
+```
+build/_<slug>/
+  <slug>.mp4 · <slug>_9x16.mp4       finished videos
+  <slug>.html · <slug>_9x16.html     standalone players (double-click)
+  web/                               player as separate files: index.html, css/, js/ (engine + this video's scenes/score/data), fonts/, audio/
+  audio/                             soundtrack.wav/.m4a, mix_raw.wav, stems/
+  voice/                             narration per line, voice.json, raw takes, casting samples
+  review/                            stills and contact sheets
+```
+Templates (`stories/_template`) are never rendered into `build/`.
 
 ## Conventions
 

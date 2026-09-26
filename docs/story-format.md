@@ -51,7 +51,7 @@
 
 | Field | Meaning |
 |---|---|
-| `id` | unique, e.g. `vo1` … (file `build/<slug>/voice/<id>.wav`) |
+| `id` | unique, e.g. `vo1` … (file `build/_<slug>/voice/<id>.wav`) |
 | `scene` | scene the line belongs to |
 | `at` | seconds after the scene is open (default 0.1) |
 | `text` | intended wording (on-screen / documentation) |

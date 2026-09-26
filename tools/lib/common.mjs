@@ -9,15 +9,20 @@ import vm from 'node:vm';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const PY = join(ROOT, '.venv', 'bin', 'python');
 
+// Every video gets its own folder build/_<slug>/ holding everything: videos, players, web export,
+// audio, narration and review images.
+export const buildDir = (slug) => `_${slug}`;
 export function paths(slug) {
-  const build = join(ROOT, 'build', slug);
-  return { story: join(ROOT, 'stories', slug), build, voice: join(build, 'voice'), review: join(build, 'review'), frames: join(build, 'frames') };
+  const build = join(ROOT, 'build', buildDir(slug));
+  return { story: join(ROOT, 'stories', slug), build, audio: join(build, 'audio'), voice: join(build, 'voice'),
+    review: join(build, 'review'), web: join(build, 'web'), frames: join(build, 'frames') };
 }
 export const fmtTag = (format) => (format === '9:16' ? '_9x16' : '');
 
 export function loadStory(slug) {
   const p = paths(slug), f = join(p.story, 'story.json');
   if (!existsSync(f)) throw new Error(`no story "${slug}" (expected ${f}); create one with: npm run new -- ${slug}`);
+  if (slug.startsWith('_') && !process.env.REELSMITH_DEV) throw new Error(`"${slug}" is a template – create a story from it: npm run new -- <slug>`);
   const story = JSON.parse(readFileSync(f, 'utf8'));
   story.slug = story.slug || slug;
   story.formats = story.formats || [story.format || '16:9'];

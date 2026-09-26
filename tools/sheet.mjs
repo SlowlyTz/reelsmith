@@ -1,5 +1,5 @@
 // Contact sheet of a rendered video: npm run sheet -- <slug> [--format 9:16] [--every 1.25] [--from 10 --to 20]
-// One tile every N seconds -> build/<slug>/review/video_sheet*.jpg (look at it: framing, clipping, continuity).
+// One tile every N seconds -> build/_<slug>/review/video_sheet*.jpg (look at it: framing, clipping, continuity).
 import { join } from 'node:path';
 import { existsSync } from 'node:fs';
 import { loadStory, ensureDir, run, args, fmtTag } from './lib/common.mjs';

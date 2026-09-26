@@ -33,5 +33,5 @@ Add recipes to `assets/manifests/samples.json` or `sfx.json` (pinned URL + sha25
 also need a level in `audio/mixer.js → INST_DB` (and `PLUCKED` if they decay naturally).
 
 ## A voice engine
-Add a branch in `tools/voice.mjs` that writes `build/<slug>/voice/raw/<id>.wav` per line; mastering,
+Add a branch in `tools/voice.mjs` that writes `build/_<slug>/voice/raw/<id>.wav` per line; mastering,
 Whisper timing and `voice.json` stay shared.

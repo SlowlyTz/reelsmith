@@ -1,0 +1,16 @@
+/* Player page styles; fonts are the ones the paper style draws with. */
+@font-face { font-family: "IM Fell English"; src: url("../assets/fonts/IMFeENrm28P.ttf"); font-style: normal; }
+@font-face { font-family: "IM Fell English"; src: url("../assets/fonts/IMFeENit28P.ttf"); font-style: italic; }
+@font-face { font-family: "IM Fell English SC"; src: url("../assets/fonts/IMFeENsc28P.ttf"); }
+@font-face { font-family: "Berkshire Swash"; src: url("../assets/fonts/BerkshireSwash-Regular.ttf"); }
+@font-face { font-family: "UnifrakturMaguntia"; src: url("../assets/fonts/UnifrakturMaguntia-Book.ttf"); }
+@font-face { font-family: "Caveat"; src: url("../assets/fonts/Caveat[wght].ttf"); font-weight: 400 700; }
+@font-face { font-family: "JetBrains Mono"; src: url("../assets/fonts/JetBrainsMono[wght].ttf"); font-weight: 100 800; }
+@font-face { font-family: "Fredoka"; src: url("../assets/fonts/Fredoka[wdth,wght].ttf"); font-weight: 300 700; }
+html, body { margin: 0; height: 100%; background: #0b0603; color: #f3e6cc; font-family: "IM Fell English", Georgia, serif; }
+#wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+canvas { max-width: 100vw; max-height: 100vh; width: auto; height: auto; display: block; }
+#play { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+  background: rgba(10, 5, 2, 0.55); cursor: pointer; font-size: 28px; border: 0; color: inherit; font-family: inherit; }
+#play .big { font-family: "Berkshire Swash", serif; font-size: 64px; color: #e8c877; text-align: center; padding: 0 16px; }
+#play.hidden { display: none; }

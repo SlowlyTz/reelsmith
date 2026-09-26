@@ -1,6 +1,6 @@
 # Tools (`npm run <tool> -- <slug> [flags]`)
 
-Flags go after the slug. All outputs land in `build/<slug>/`.
+Flags go after the slug. All outputs of a video land in its own folder `build/_<slug>/` (layout: AGENTS.md → Build output).
 
 | Tool | Flags | Output / purpose | Typical time |
 |---|---|---|---|
@@ -12,15 +12,15 @@ Flags go after the slug. All outputs land in `build/<slug>/`.
 | `timeline` | – | scene/line table, fit problems (exit 2) | instant |
 | `snap` | `--format`, `--sheet`, `[times…]` | `review/snaps*/t*.jpg`, `review/sheet*.jpg` | ~5 s |
 | `play` | `--format` | prints a local URL for live preview (Ctrl+C to stop) | – |
-| `mix` | `--stems` | `soundtrack.wav/.m4a`, loudness report | ~10–30 s |
+| `mix` | `--stems` | `audio/soundtrack.wav/.m4a` (+ `audio/stems/`), loudness report | ~10–30 s |
 | `render` | `--format`, `--workers N`, `--range a-b`, `--keep-frames` | `<slug>.mp4` / `<slug>_9x16.mp4` (H.264 CRF 16 + AAC) | ~1 min per minute of video |
 | `sheet` | `--format`, `--every s`, `--from`, `--to` | `review/video_sheet*_N.jpg` from the mp4 | seconds |
-| `html` | `--format` | standalone `<slug>.html` (engine, fonts, audio inlined) | seconds |
+| `html` | `--format` | standalone `<slug>.html` (everything inlined) + `web/` (index.html, css/, js/, fonts/, audio/) | seconds |
 | `video` | `--revoice`, `--format`, `--force` | full pipeline: voice (if missing) → fit → mix → render → html → sheets | minutes |
 
 Environment: `CHROME_PATH` (browser binary), `CHROME_FLAGS` (replace the GPU flags, e.g. empty for CPU),
 `WHISPER_MODEL` (default `large-v3-turbo`).
 
-Internals: all browser work goes through `tools/lib/common.mjs` – a static server rooted at the repo
-(`POST /upload/<path>` writes into `build/`) and `openStory()` which loads `engine/page.html?story=<slug>&mode=…`
-and fails loudly on any page error.
+Internals: all browser work goes through `tools/lib/common.mjs`: `paths(slug)` / `buildDir(slug)` define the
+per-video folder, a static server is rooted at the repo (`POST /upload/<path>` writes into `build/`), and
+`openStory()` loads `engine/page.html?story=<slug>&mode=…` and fails loudly on any page error.
