@@ -316,6 +316,78 @@
       "notes": "Full ball-up crumple (2.8 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
     },
     {
+      "file": "yawn_1.wav",
+      "category": "yawn",
+      "start": 2.45,
+      "duration": 2.4,
+      "channels": 1,
+      "fadeInMs": 30,
+      "fadeOutMs": 200,
+      "source": {
+        "page": "https://freesound.org/s/157303/",
+        "url": "https://cdn.freesound.org/previews/157/157303_2840087-hq.mp3",
+        "sha256": "d5df237b9f04cc50cbcc46918558cf1137db27906a510ff453da4016c87f6f07"
+      },
+      "author": "husky70",
+      "original_title": "Yawning Man.mp3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Big exaggerated male yawn (2.4 s), clean. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "yawn_2.wav",
+      "category": "yawn",
+      "start": 0.0,
+      "duration": 3.3,
+      "channels": 1,
+      "fadeInMs": 30,
+      "fadeOutMs": 250,
+      "source": {
+        "page": "https://freesound.org/s/240139/",
+        "url": "https://cdn.freesound.org/previews/240/240139_729251-hq.mp3",
+        "sha256": "8e14c009b632ad3785ed4a916e980542da25474ab3f5bb44f707d57f98a2e8c5"
+      },
+      "author": "DrFortyseven",
+      "original_title": "Yawn (Male)",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Male yawn with audible inhale, loud voiced 'aaah-hm' from ~1.6 s (3.3 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "yawn_3.wav",
+      "category": "yawn",
+      "start": 0.05,
+      "duration": 2.55,
+      "channels": 2,
+      "fadeInMs": 30,
+      "fadeOutMs": 250,
+      "source": {
+        "page": "https://freesound.org/s/566324/",
+        "url": "https://cdn.freesound.org/previews/566/566324_10435241-hq.mp3",
+        "sha256": "b90d74769f866fb80f743d59c44c5ed43ae5b17612e1c276a0b6737094a53ef6"
+      },
+      "author": "njjjjjjjjjjjjjjjjjjjjjjjj",
+      "original_title": "Yawning 2",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Higher, sustained voiced yawn (2.6 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "yawn_4.wav",
+      "category": "yawn",
+      "start": 0.1,
+      "duration": 1.25,
+      "channels": 2,
+      "fadeInMs": 20,
+      "fadeOutMs": 150,
+      "source": {
+        "page": "https://freesound.org/s/272030/",
+        "url": "https://cdn.freesound.org/previews/272/272030_5165013-hq.mp3",
+        "sha256": "0381832c1921f71dceb95d169e76f4683ff39c1b65c82841f4a842a77a97eb91"
+      },
+      "author": "aldenroth2",
+      "original_title": "Male Yawn",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short clean male yawn (1.25 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
       "file": "waves_soft_1.wav",
       "category": "waves_soft",
       "start": 28,

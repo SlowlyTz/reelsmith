@@ -69,6 +69,7 @@ Automatic cues: book open/close, page turns, pop-ups on every scene opening, sta
 | book | book_open (2.5, thump at ~1.8 s), book_open_2 (0.5), book_close (0.5), book_close_2 (0.2) |
 | paper | paper_rustle_1 (1.1), _2 (0.9), _3 (1.6, slide), _4 (0.9, flutter) · paper_pop_1 (0.4, snap), _2 (0.5), _3 (0.25, tap), _4 (1.0, swish) · paper_crumple_1 (0.7, dense burst), _2 (1.9, light crackle), _3 (2.8, full ball-up) |
 | ambience (30 s) | waves_soft_1/2, forest_ambience_1/2, night_ambience_1/2 (crickets), city_distant_1/2, wind_soft_1 |
+| voice | yawn_1 (2.4, big exaggerated male yawn) · yawn_2 (3.3, inhale then loud 'aaah-hm' from ~1.6 s) · yawn_3 (2.6, higher, sustained) · yawn_4 (1.25, short) – vary with `rate` 0.9–1.15 |
 | other | typing_soft_1 (6 s, pause at start → `offset: 0.7`), typing_soft_2 (6.4 s) |
 | procedural | `synth:boom` (5.5 s deep impact: sub drop + crack + rumble – explosions, big reveals) · `synth:whoosh` (1.2 s, moves L→R) · `synth:riser` (3 s swell peaking at its end – start it 3 s before the hit) · `synth:sub` (3.2 s low drone hit) |
 

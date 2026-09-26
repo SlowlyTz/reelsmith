@@ -100,6 +100,10 @@ Processing, with the exact settings for each file in `assets/manifests/sfx.json`
 | paper_crumple_1.wav | Paper Crumpling | Ezcah | https://freesound.org/s/248178/ |
 | paper_crumple_2.wav | Crumpling Paper | OwlStorm | https://freesound.org/s/151231/ |
 | paper_crumple_3.wav | Paper Crumpling | Ezcah | https://freesound.org/s/248178/ |
+| yawn_1.wav | Yawning Man.mp3 | husky70 | https://freesound.org/s/157303/ |
+| yawn_2.wav | Yawn (Male) | DrFortyseven | https://freesound.org/s/240139/ |
+| yawn_3.wav | Yawning 2 | njjjjjjjjjjjjjjjjjjjjjjjj | https://freesound.org/s/566324/ |
+| yawn_4.wav | Male Yawn | aldenroth2 | https://freesound.org/s/272030/ |
 | waves_soft_1.wav | Calm ocean waves | SamsterBirdies | https://freesound.org/s/578524/ |
 | waves_soft_2.wav | Gentle small waves lapping on shore.wav | Alex_hears_things | https://freesound.org/s/352356/ |
 | forest_ambience_1.wav | sfx_amb_forest_spring_afternoon-01.wav | bajko | https://freesound.org/s/385280/ |
