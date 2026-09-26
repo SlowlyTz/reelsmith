@@ -1,0 +1,131 @@
+{
+  "title": "How a Black Hole Is Born",
+  "slug": "black-hole",
+  "lang": "en",
+  "style": "paper",
+  "frame": "stage",
+  "formats": [
+    "16:9"
+  ],
+  "fps": 24,
+  "animFps": 12,
+  "music": {
+    "bpm": 64,
+    "beatsPerBar": 1,
+    "key": "D"
+  },
+  "voice": {
+    "engine": "xtts",
+    "speaker": "Kumar Dahl",
+    "speed": 1.05,
+    "tries": 8
+  },
+  "intro": {
+    "bars": 0
+  },
+  "subtitles": {
+    "style": "bold",
+    "y": 0.87,
+    "x": 0.5,
+    "size": 0.055,
+    "maxWidth": 0.8
+  },
+  "outro": {
+    "bars": 3,
+    "sticker": null
+  },
+  "render": {
+    "targetMB": 17
+  },
+  "scenes": [
+    {
+      "id": "star",
+      "bars": 15
+    },
+    {
+      "id": "giant",
+      "bars": 19
+    },
+    {
+      "id": "hole",
+      "bars": 12
+    },
+    {
+      "id": "horizon",
+      "bars": 9
+    },
+    {
+      "id": "end",
+      "bars": 5
+    }
+  ],
+  "lines": [
+    {
+      "id": "vo1",
+      "scene": "star",
+      "at": -0.42,
+      "text": "What happens when a giant star dies?"
+    },
+    {
+      "id": "vo2",
+      "scene": "star",
+      "at": 2.15,
+      "text": "A massive star shines by fusing atoms in its core."
+    },
+    {
+      "id": "vo3",
+      "scene": "star",
+      "at": 5.85,
+      "text": "Fusion pushes outward. Gravity pulls inward. For millions of years, they balance."
+    },
+    {
+      "id": "vo4",
+      "scene": "giant",
+      "at": 0.25,
+      "text": "As its fuel runs low, the star swells into a red supergiant.",
+      "tts": "As its fuel runs low, the star swells into a red super giant."
+    },
+    {
+      "id": "vo5",
+      "scene": "giant",
+      "at": 5.45,
+      "text": "When the fuel is gone, gravity wins. The core collapses in a split second,"
+    },
+    {
+      "id": "vo6",
+      "scene": "giant",
+      "at": 11.1,
+      "text": "and the star explodes as a supernova, brighter than a whole galaxy."
+    },
+    {
+      "id": "vo7",
+      "scene": "hole",
+      "at": 0.25,
+      "text": "What remains is crushed smaller and smaller, into a black hole."
+    },
+    {
+      "id": "vo8",
+      "scene": "hole",
+      "at": 5.4,
+      "text": "Gas and dust spiral around it, glowing hot as they fall in."
+    },
+    {
+      "id": "vo9",
+      "scene": "horizon",
+      "at": 0.2,
+      "text": "Its edge is the event horizon. Past it, nothing can escape. Not even light."
+    },
+    {
+      "id": "vo10",
+      "scene": "end",
+      "at": 0.25,
+      "text": "The darkest thing in the universe is born from one of the brightest."
+    }
+  ],
+  "mix": {
+    "music": -6,
+    "voice": 0,
+    "sfx": -5,
+    "amb": -14
+  }
+}
