@@ -1,5 +1,5 @@
 {
-  "name": "video-gen",
+  "name": "reelsmith",
   "version": "0.1.0",
   "description": "Prompt-to-video pipeline for narrated paper-craft stop-motion films (pure JavaScript animation, local TTS, sampled orchestra).",
   "private": true,
