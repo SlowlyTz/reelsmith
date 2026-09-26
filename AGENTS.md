@@ -26,7 +26,8 @@ Then decide (defaults in brackets) and note the decisions for the final report:
 | frame | `book` = storybook on a table (stories, fairytales, sentimental gifts) · `stage` = full-bleed paper diorama (greetings, invitations, explainers, promos, social) |
 | formats | `16:9`, `9:16` or both [both] – 9:16 for social/phone, 16:9 for TV/YouTube |
 | narration | yes (storytelling, explaining) or no (music + on-screen text) [yes for stories] |
-| subtitles | `"subtitles": true` for narrated social/9:16 videos or when watched muted |
+| subtitles | narrated social/muted viewing: `{ "style": "words" }` (9:16, word by word) · `{ "style": "bold" }` (16:9 captions) · `true` (storybook strip) |
+| file size | `"render": { "targetMB": N }` when there is a size limit (e.g. GitHub ≤ 20 MB, TikTok) |
 | language | of voice and all on-screen text [German] |
 | length | [45–60 s]; social cuts 15–30 s |
 | music | mood + meter: fairytale waltz 3/4 ~100 BPM · upbeat 4/4 110–124 BPM (pizzicato, glockenspiel) · calm 4/4 70–85 BPM (harp, strings) |

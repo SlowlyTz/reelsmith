@@ -1,6 +1,7 @@
 // Offline mix (Web Audio API): score + narration + sound effects + ambience -> float WAV.
 // Frame events (page turns, pop-ups, cover, sticker) get their sounds automatically;
-// scenes add their own via `sfx: [[lt, file, gain, {pan, rate, dur, offset, bus, fadeIn, fadeOut}], ...]`.
+// scenes add their own via `sfx: [[lt, file, gain, {pan, rate, dur, offset, bus, fadeIn, fadeOut}], ...]`,
+// score.js via M.sfx(t, file, gain, opts). `file` may also be a procedural 'synth:boom|whoosh|riser|sub'.
 (function () {
   const VG = window.VG, SR = 48000;
   const INST_DB = { music_box: -1, celesta: -3, harp: -4, glockenspiel: -7, violins: -5, violas: -8, cellos: -7, violin_solo: -8,
@@ -22,6 +23,50 @@
       }
       for (const [tt, g] of [[0.013, 0.5], [0.021, 0.35], [0.033, 0.28], [0.047, 0.2]]) { const i = Math.floor((pre + tt + c * 0.003) * SR); if (i < n) d[i] += g * (c ? -1 : 1); }
     }
+    return b;
+  }
+
+  // Procedural sounds, usable wherever a file name is expected: 'synth:boom' | 'whoosh' | 'riser' | 'sub'.
+  // Deterministic (seeded noise), stereo, peak ≈ −3 dBFS.
+  function synth(ctx, name) {
+    const LEN = { boom: 5.5, whoosh: 1.2, riser: 3, sub: 3.2 }[name];
+    if (!LEN) throw new Error(`unknown synth sound synth:${name} (boom | whoosh | riser | sub)`);
+    const n = Math.floor(LEN * SR), b = ctx.createBuffer(2, n, SR), TAU = Math.PI * 2;
+    for (let c = 0; c < 2; c++) {
+      const d = b.getChannelData(c); let seed = 1234567 + c * 7919 + name.length * 31;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed / 2147483647) * 2 - 1; };
+      // state-variable filter (TPT), one per voice
+      const svf = () => { let s1 = 0, s2 = 0; return (x, fc, q = 0.7) => { const g = Math.tan(Math.PI * Math.min(fc, SR * 0.45) / SR), k = 1 / q, a1 = 1 / (1 + g * (g + k));
+        const v1 = a1 * (s1 + g * (x - s2)), v2 = s2 + g * v1; s1 = 2 * v1 - s1; s2 = 2 * v2 - s2; return { lp: v2, bp: v1, hp: x - k * v1 - v2 }; }; };
+      const f1 = svf(), f2 = svf(), f3 = svf(); let ph = 0, ph2 = 0, brown = 0;
+      for (let i = 0; i < n; i++) {
+        const t = i / SR, w = rnd(); let y = 0;
+        if (name === 'boom') {
+          // sub drop 95 → 30 Hz + low noise body + short crack + long rumble
+          const f = 30 + 65 * Math.exp(-t * 5.5); ph += TAU * f / SR;
+          const env = Math.min(1, t / 0.004) * Math.exp(-t * 0.95);
+          y = Math.sin(ph) * env * 0.85 + Math.sin(ph * 2) * env * 0.12 * Math.exp(-t * 3);
+          y += f1(w, 180 + 2800 * Math.exp(-t * 9), 0.6).lp * Math.min(1, t / 0.01) * Math.exp(-t * 2.2) * 0.9;
+          y += f2(w, 3500, 0.5).bp * Math.exp(-t * 60) * 0.9;
+          brown = brown * 0.995 + w * 0.05; y += f3(brown, 110, 0.7).lp * Math.min(1, t / 0.15) * Math.exp(-t * 0.7) * 2.2;
+        } else if (name === 'whoosh') {
+          const k = t / LEN, env = Math.pow(Math.sin(Math.PI * Math.min(1, k * 1.08)), 2.2);
+          y = f1(w, 350 + 2600 * Math.sin(Math.PI * k), 1.6).bp * env * 1.6;
+          y *= c === 0 ? 1.15 - k * 0.5 : 0.65 + k * 0.5;             // moves left → right
+        } else if (name === 'riser') {
+          const k = t / LEN, env = Math.pow(k, 2.4) * (k > 0.985 ? (1 - k) / 0.015 : 1);
+          const f = 70 * Math.pow(9, k); ph += TAU * f / SR; ph2 += TAU * f * 1.503 / SR;
+          y = (Math.sin(ph) * 0.35 + Math.sin(ph2) * 0.15) * env + f1(w, 300 + 7000 * k * k, 0.9).bp * env * 1.1;
+        } else if (name === 'sub') {
+          ph += TAU * 44 / SR;
+          const env = Math.min(1, t / 0.02) * Math.exp(-t * 1.1);
+          y = (Math.sin(ph) + Math.sin(ph * 2) * 0.18) * env * 0.9 + f1(w, 90, 0.7).lp * env * 0.6;
+        }
+        d[i] = y;
+      }
+    }
+    let pk = 1e-9; for (let c = 0; c < 2; c++) for (const v of b.getChannelData(c)) pk = Math.max(pk, Math.abs(v));
+    for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) d[i] *= 0.7 / pk; }
     return b;
   }
 
@@ -98,14 +143,15 @@
     for (const l of Object.values(T.lines)) {
       let b; try { b = await load(ctx, `${o.voice}${l.id}.wav`); } catch { console.warn('no voice for', l.id); continue; }
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(voice); s.start(l.start);
-      duck.gain.setTargetAtTime(db(-5.5), l.start - 0.35, 0.12);
+      duck.gain.setTargetAtTime(db(-5.5), Math.max(0, l.start - 0.35), 0.12);
       duck.gain.setTargetAtTime(1, l.speechEnd + 0.15, 0.35);
     }
 
     // ---------- sound effects ----------
     const bufs = {};
     const play = async (t, file, gain = 1, op = {}) => {
-      const b = (bufs[file] = bufs[file] || await load(ctx, o.sfx + file)), s = ctx.createBufferSource(); s.buffer = b;
+      const b = (bufs[file] = bufs[file] || (file.startsWith('synth:') ? synth(ctx, file.slice(6)) : await load(ctx, o.sfx + file)));
+      const s = ctx.createBufferSource(); s.buffer = b;
       if (op.rate) s.playbackRate.value = op.rate;
       const g = ctx.createGain(), p = ctx.createStereoPanner(); p.pan.value = op.pan || 0;
       const off = op.offset || 0, dur = Math.min(op.dur || Infinity, (b.duration - off) / (op.rate || 1)), t0 = Math.max(0, t);
@@ -115,6 +161,7 @@
     };
     const cues = frameCues(T);
     T.scenes.forEach((s) => (VG.defs[s.id]?.sfx || []).forEach(([lt, file, gain, op]) => cues.push([s.openAt + lt, file, gain, op || {}])));
+    cues.push(...M.sfxCues.map(([t, file, gain, op]) => [t, file, gain, op || {}]));
     for (const c of cues) await play(...c);
 
     const out = await ctx.startRendering();

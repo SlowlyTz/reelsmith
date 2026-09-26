@@ -35,7 +35,8 @@ Content origin is the centre; x right, y down. Use fractions of `st.L.w/h`, scal
 `s = Math.min(w, h) / 900` (book) or `/ 1080` (stage). Typical anchors:
 - ground line `h * 0.3` (book) – puppets stand with feet on it
 - 16:9 book: left page centre `-w/4`, right page centre `w/4`; never put faces or text within ±60 of x = 0
-- 9:16: one tall column – stack elements vertically, leave the lower 25 % free when subtitles are on
+- 9:16: one tall column – stack elements vertically, leave the subtitle band free (see story-format.md → subtitles);
+  for TikTok/Reels also keep faces and text out of the bottom 20 % and the right 15 %
 
 ## Pop-ups & depth
 

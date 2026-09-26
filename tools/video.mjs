@@ -1,4 +1,4 @@
-// Everything in one go: npm run video -- <slug> [--revoice] [--format 16:9] [--force]
+// Everything in one go: npm run video -- <slug> [--revoice] [--format 16:9] [--force] [--workers N] [--target-mb N | --crf N]
 // voice (if missing) -> fit check -> soundtrack -> video per format -> players (html + web/) -> contact sheets.
 // Everything lands in build/_<slug>/.
 import { join } from 'node:path';
@@ -15,7 +15,8 @@ const { T, check } = timeline(story, voice), r = check(T);
 if (r.problems.length && !a.force) { console.error('\nnarration does not fit:\n- ' + r.problems.join('\n- ') + '\nfix story.json (bars / line timing) or pass --force'); process.exit(2); }
 step('mix');
 const formats = a.format ? [a.format] : story.formats;
-for (const f of formats) { step('render', '--format', f); step('html', '--format', f); step('sheet', '--format', f); }
+const pass = ['workers', 'target-mb', 'crf'].flatMap((k) => (a[k] ? [`--${k}`, String(a[k])] : []));
+for (const f of formats) { step('render', '--format', f, ...pass); step('html', '--format', f); step('sheet', '--format', f); }
 const dir = `build/${buildDir(slug)}`;
 console.log(`\nDONE – everything is in ${dir}/ (${T.end.toFixed(1)} s):`);
 for (const f of formats) console.log(`  ${dir}/${slug}${fmtTag(f)}.mp4   ${dir}/${slug}${fmtTag(f)}.html`);

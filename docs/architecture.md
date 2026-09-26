@@ -27,6 +27,7 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 | `engine/styles/paper/frames/book.js` | storybook: table, cover, page stacks, curled page turns, camera limits |
 | `engine/styles/paper/frames/stage.js` | full-bleed paper stage, sliding-sheet transitions |
 | `engine/styles/paper/post.js` | lamp grade, vignette, exposure flicker, film grain, fades |
+| `engine/styles/paper/subtitles.js` | `VG.subtitles` – strip / bold captions / word-by-word, aligned to Whisper word times |
 | `engine/page.html` + `page.css` | loads everything; modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
 | `audio/dsl.js` | score language (`VG.scoreDSL(T)`, `VG.chord`, `VG.note`) |
 | `audio/mixer.js` | offline mix: samples, narration + ducking, sfx, reverb, master |
@@ -65,7 +66,7 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 2. `frame.draw(ctx, t, tq, res)` – table/cover/pages or stage; during page turns both spreads are
    rendered offscreen and mapped onto a curled 3D page (64 perspective strips)
 3. per scene: paper fill → `bg` → grain overlay → gutter shading (book) → `fg` → `light`
-4. `frame.overlay` (stage sticker + outro text), optional subtitles (screen space), then `VG.post`
+4. `frame.overlay` (stage sticker + outro text), optional `VG.subtitles` (screen space), then `VG.post`
 
 ## Performance
 

@@ -97,6 +97,9 @@ Processing, with the exact settings for each file in `assets/manifests/sfx.json`
 | paper_pop_2.wav | open-cardboard-box-compartment.wav | newagesoup | https://freesound.org/s/364740/ |
 | paper_pop_3.wav | Box 02.wav | totalcult | https://freesound.org/s/388647/ |
 | paper_pop_4.wav | 14 Cardboard Flap.mp3 | Coral_Island_Studios | https://freesound.org/s/459439/ |
+| paper_crumple_1.wav | Paper Crumpling | Ezcah | https://freesound.org/s/248178/ |
+| paper_crumple_2.wav | Crumpling Paper | OwlStorm | https://freesound.org/s/151231/ |
+| paper_crumple_3.wav | Paper Crumpling | Ezcah | https://freesound.org/s/248178/ |
 | waves_soft_1.wav | Calm ocean waves | SamsterBirdies | https://freesound.org/s/578524/ |
 | waves_soft_2.wav | Gentle small waves lapping on shore.wav | Alex_hears_things | https://freesound.org/s/352356/ |
 | forest_ambience_1.wav | sfx_amb_forest_spring_afternoon-01.wav | bajko | https://freesound.org/s/385280/ |

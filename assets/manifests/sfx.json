@@ -265,6 +265,57 @@
       "notes": "Cardboard flap swish (~1s) - first flap of source; good for an element unfolding. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
     },
     {
+      "file": "paper_crumple_1.wav",
+      "category": "paper_crumple",
+      "start": 0.85,
+      "duration": 0.7,
+      "channels": 2,
+      "fadeOutMs": 60,
+      "source": {
+        "page": "https://freesound.org/s/248178/",
+        "url": "https://cdn.freesound.org/previews/248/248178_1900515-hq.mp3",
+        "sha256": "8ca2f7b0a117d65db52be7c2fc022387a4475978aa7e989ea634c41b449f869a"
+      },
+      "author": "Ezcah",
+      "original_title": "Paper Crumpling",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short dense crumple burst (0.7 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_crumple_2.wav",
+      "category": "paper_crumple",
+      "start": 0.08,
+      "duration": 1.85,
+      "channels": 2,
+      "fadeOutMs": 80,
+      "source": {
+        "page": "https://freesound.org/s/151231/",
+        "url": "https://cdn.freesound.org/previews/151/151231_140737-hq.mp3",
+        "sha256": "9d1cef33658d98931b5dcc5eb3377068f199ef93c6c0a08217320245f43430b8"
+      },
+      "author": "OwlStorm",
+      "original_title": "Crumpling Paper",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Lighter, crackly crumple (1.9 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "paper_crumple_3.wav",
+      "category": "paper_crumple",
+      "start": 0.08,
+      "duration": 2.8,
+      "channels": 2,
+      "fadeOutMs": 120,
+      "source": {
+        "page": "https://freesound.org/s/248178/",
+        "url": "https://cdn.freesound.org/previews/248/248178_1900515-hq.mp3",
+        "sha256": "8ca2f7b0a117d65db52be7c2fc022387a4475978aa7e989ea634c41b449f869a"
+      },
+      "author": "Ezcah",
+      "original_title": "Paper Crumpling",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Full ball-up crumple (2.8 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
       "file": "waves_soft_1.wav",
       "category": "waves_soft",
       "start": 28,
@@ -362,7 +413,10 @@
       "channels": 2,
       "fadeInMs": 1000,
       "fadeOutMs": 1500,
-      "highpassHz": [20, 120],
+      "highpassHz": [
+        20,
+        120
+      ],
       "source": {
         "page": "https://freesound.org/s/333221/",
         "url": "https://cdn.freesound.org/previews/333/333221_2098408-hq.mp3",

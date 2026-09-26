@@ -17,16 +17,47 @@
     "props": true                          // scissors, thread, pencil, confetti on the table
   },
   "intro": { "bars": 1 },                  // closed book before the cover opens (stage: default 0)
-  "subtitles": false,                      // narration as paper-strip subtitles, word by word
+  "subtitles": false,                      // true | { "style": "bold" | "words", … } – see "subtitles" below
   "outro": { "bars": 3, "sticker": "heart", "text": "Alles Gute!" },
                                            // sticker: "heart" | "star" | null (default: heart for book, none for stage)
                                            // text: stage only – cut-out letters under the sticker
   "mix": { "music": -8, "voice": 0, "sfx": -5, "amb": -14 },   // bus gains in dB (optional)
+  "render": { "targetMB": 18 },            // file size (two-pass) – or { "crf": 16 } for constant quality (default)
   "cast": { "<id>": { … } },               // puppets, see library.md
   "scenes": [ { "id": "wald", "bars": 5 } ],
-  "lines":  [ { "id": "vo2", "scene": "wald", "at": 0.2, "text": "…", "tts": "…", "ref": "…" } ]
+  "lines":  [ { "id": "vo2", "scene": "wald", "at": 0.2, "text": "…", "tts": "…", "ref": "…", "sub": "…" } ]
 }
 ```
+
+Line fields: `text` = the words (subtitles, meaning) · `tts` = what the voice reads · `ref` = transcript form for
+verification (digits) · `sub` = subtitle text if it must differ from `text` (`*word*` = accent colour; `false` = no subtitle).
+
+## subtitles
+
+Timed by the Whisper word timestamps of each line. Display words (`sub`/`text`) are aligned to the spoken
+words, so respellings in `tts` ("Mielo", "zweitausend vierundzwanzig") still show as "Milo", "2024".
+
+| style | Look | Use for |
+|---|---|---|
+| `true` | the whole line on a cream paper strip, words darken as spoken | calm storybooks |
+| `bold` | caption chunks (≤ 2 rows; split at punctuation, long phrases split in balance before prepositions/conjunctions), heavy white text with dark outline, spoken word highlighted | explainers, YouTube, 16:9 |
+| `words` | one word at a time, popping in on its start on a paper tag (TikTok style) | 9:16 social |
+
+| Option | bold default | words default | Meaning |
+|---|---|---|---|
+| `y`, `x` | 0.87 (9:16: 0.72), 0.5 | 0.8 (9:16: 0.67), 0.5 | centre, fraction of H / W |
+| `size` | 0.056 | 0.09 | font size, fraction of min(W, H) |
+| `maxWidth` | 0.8 | 0.8 | fraction of W (long words shrink to fit) |
+| `box` | false | true | paper backing (`paperColor`) instead of an outline |
+| `color`, `stroke`, `highlight`, `ink`, `accent`, `paperColor` | cream, dark brown, yellow, dark brown, orange, cream | …, yellow tag | text / outline / spoken word / text on paper / `*accent*` / backing |
+| `maxWords`, `rows` | 8, 2 | – | chunk size |
+| `font`, `weight` | Fredoka 700 | Fredoka 700 | |
+
+TikTok safe zone (9:16): keep subtitles and key content out of the bottom ~20 %, the right ~15 % (UI buttons)
+and the top ~8 % → e.g. `{ "style": "words", "y": 0.67, "x": 0.45, "maxWidth": 0.7 }`.
+Check word timing with `npm run snap -- <slug> --format 9:16 <word start + 0.05> …`.
+In the page, `VG.subtitleWords()` lists every displayed word with its times and
+`VG.subtitleChunks(ctx)` the bold caption chunks – handy for checks.
 
 ## voice
 

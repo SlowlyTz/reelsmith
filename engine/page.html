@@ -19,6 +19,7 @@
 <script src="styles/paper/frames/book.js"></script>
 <script src="styles/paper/frames/stage.js"></script>
 <script src="styles/paper/post.js"></script>
+<script src="styles/paper/subtitles.js"></script>
 <script src="runtime.js"></script>
 <script src="../audio/dsl.js"></script>
 <script src="../audio/mixer.js"></script>
@@ -40,7 +41,7 @@
     }
     story.slug = story.slug || slug;
     if (q.get('format')) story.format = q.get('format');
-    const fams = ['20px "IM Fell English"', 'italic 20px "IM Fell English"', '20px "IM Fell English SC"', '20px "Berkshire Swash"', '20px UnifrakturMaguntia', '700 20px Caveat', '700 20px "JetBrains Mono"', '600 20px Fredoka'];
+    const fams = ['20px "IM Fell English"', 'italic 20px "IM Fell English"', '20px "IM Fell English SC"', '20px "Berkshire Swash"', '20px UnifrakturMaguntia', '700 20px Caveat', '700 20px "JetBrains Mono"', '600 20px Fredoka', '700 20px Fredoka'];
     await Promise.all(fams.map((f) => document.fonts.load(f, 'AaÄäÖöÜüß…').catch(() => console.warn('font missing: ' + f))));
     const T = VG.start(story, voice || {});
     const cv = document.getElementById('c'), ctx = cv.getContext('2d');

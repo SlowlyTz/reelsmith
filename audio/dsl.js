@@ -18,9 +18,11 @@
   VG.note = note; VG.chord = chord;
 
   VG.scoreDSL = (T) => {
-    const ev = [];
+    const ev = [], fx = [];
     const M = {
-      events: ev, bar: T.bar, beat: T.beat,
+      events: ev, sfxCues: fx, bar: T.bar, beat: T.beat,
+      // a sound effect at absolute time t (file from assets/sfx or 'synth:boom' etc.), same opts as scene sfx
+      sfx(t, file, gain = 1, o = {}) { fx.push([t, file, gain, o]); },
       // absolute time of bar (+ beat) counted from 0
       bt: (bar, beat = 0) => bar * T.bar + beat * T.beat,
       // first bar index of a scene / of the outro

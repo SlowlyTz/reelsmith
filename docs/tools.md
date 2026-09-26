@@ -13,10 +13,10 @@ Flags go after the slug. All outputs of a video land in its own folder `build/_<
 | `snap` | `--format`, `--sheet`, `[times…]` | `review/snaps*/t*.jpg`, `review/sheet*.jpg` | ~5 s |
 | `play` | `--format` | prints a local URL for live preview (Ctrl+C to stop) | – |
 | `mix` | `--stems` | `audio/soundtrack.wav/.m4a` (+ `audio/stems/`), loudness report | ~10–30 s |
-| `render` | `--format`, `--workers N`, `--range a-b`, `--keep-frames` | `<slug>.mp4` / `<slug>_9x16.mp4` (H.264 CRF 16 + AAC) | ~1 min per minute of video |
+| `render` | `--format`, `--workers N`, `--range a-b`, `--keep-frames`, `--target-mb N`, `--crf N`, `--encode-only` | `<slug>.mp4` / `<slug>_9x16.mp4` (H.264 + AAC; CRF 16, or two-pass to `story.render.targetMB`) | ~1 min per minute of video |
 | `sheet` | `--format`, `--every s`, `--from`, `--to` | `review/video_sheet*_N.jpg` from the mp4 | seconds |
 | `html` | `--format` | standalone `<slug>.html` (everything inlined) + `web/` (index.html, css/, js/, fonts/, audio/) | seconds |
-| `video` | `--revoice`, `--format`, `--force` | full pipeline: voice (if missing) → fit → mix → render → html → sheets | minutes |
+| `video` | `--revoice`, `--format`, `--force`, `--workers`, `--target-mb`, `--crf` | full pipeline: voice (if missing) → fit → mix → render → html → sheets | minutes |
 
 Environment: `CHROME_PATH` (browser binary), `CHROME_FLAGS` (replace the GPU flags, e.g. empty for CPU),
 `WHISPER_MODEL` (default `large-v3-turbo`).

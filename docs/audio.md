@@ -42,6 +42,7 @@ VG.compose = (M, T) => {
 | `gliss(inst, notes, t, step, vel, dur)` · `scale(root, fromOct, toOct)` | runs (cover opening, reveals) |
 | `chime(t, ...notes)` | glockenspiel accents |
 | `add(inst, note, t, dur, vel, pan, {attack})` | anything else |
+| `sfx(t, file, gain, opts)` | a sound effect at absolute time t (see Sound effects) |
 
 Chords: root + `''`, `m`, `7`, `m7`, `maj7`, `sus4`, `sus2`, `dim`, `add9` (e.g. `Bb`, `F#m`, `Gm7`). Notes: `'C#5'` or MIDI numbers.
 
@@ -66,6 +67,11 @@ Automatic cues: book open/close, page turns, pop-ups on every scene opening, sta
 |---|---|
 | page turn | page_turn_1 (0.4 s), _2 (0.7), _3 (1.6, full), _4 (0.4) |
 | book | book_open (2.5, thump at ~1.8 s), book_open_2 (0.5), book_close (0.5), book_close_2 (0.2) |
-| paper | paper_rustle_1 (1.1), _2 (0.9), _3 (1.6, slide), _4 (0.9, flutter) · paper_pop_1 (0.4, snap), _2 (0.5), _3 (0.25, tap), _4 (1.0, swish) |
+| paper | paper_rustle_1 (1.1), _2 (0.9), _3 (1.6, slide), _4 (0.9, flutter) · paper_pop_1 (0.4, snap), _2 (0.5), _3 (0.25, tap), _4 (1.0, swish) · paper_crumple_1 (0.7, dense burst), _2 (1.9, light crackle), _3 (2.8, full ball-up) |
 | ambience (30 s) | waves_soft_1/2, forest_ambience_1/2, night_ambience_1/2 (crickets), city_distant_1/2, wind_soft_1 |
 | other | typing_soft_1 (6 s, pause at start → `offset: 0.7`), typing_soft_2 (6.4 s) |
+| procedural | `synth:boom` (5.5 s deep impact: sub drop + crack + rumble – explosions, big reveals) · `synth:whoosh` (1.2 s, moves L→R) · `synth:riser` (3 s swell peaking at its end – start it 3 s before the hit) · `synth:sub` (3.2 s low drone hit) |
+
+Place sounds per scene (`sfx: [[lt, file, gain, opts]]`, lt relative to the scene opening) or at absolute
+times from `score.js`: `M.sfx(t, file, gain, opts)`, e.g. on a spoken word
+`M.sfx(T.lines.vo4.words[2][1], 'synth:boom', 1.2)`. Loud one-offs (boom) may go above 1 – the limiter catches peaks.
