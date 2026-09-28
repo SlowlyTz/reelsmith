@@ -1,0 +1,11 @@
+{
+  "name": "wissen-creator",
+  "engine": "qwen3-tts",
+  "model": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+  "language": "German",
+  "seed": 1234,
+  "temperature": 0.6,
+  "subtalker_temperature": 0.6,
+  "instruct": "Native German speaker from Germany, standard German, no accent. Sounds like a real person, not an actor or announcer: speaks casually and naturally into a phone camera, conversational, relaxed and even tone, steady consistent voice, no dramatic emphasis, no exaggerated intonation. A German man around 28, knowledgeable science content creator, warm and friendly, calm confidence, lightly amused, like explaining something interesting to a friend.",
+  "ref_text": "Okay, kurze Frage: Warum gähnen wir eigentlich? Forscher vermuten, dass Gähnen dein Gehirn ein kleines bisschen abkühlt. Klingt komisch, ist aber ziemlich clever."
+}

@@ -1,9 +1,9 @@
 // Narration: npm run voice -- <slug> [--only vo2,vo3]
-// Generates every line of story.json with Piper or XTTS (story.voice.engine), masters it and
+// Generates every line of story.json with Qwen3-TTS, Piper or XTTS (story.voice.engine), masters it and
 // measures word timings with Whisper -> build/_<slug>/voice/<id>.wav + voice.json.
 // Always read the report: a low "sim" means the transcript differs from the text (mispronounced
 // or garbled word) – fix the line's "tts" spelling and regenerate just that line with --only.
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { ROOT, PY, loadStory, ensureDir, duration, args } from './lib/common.mjs';
@@ -38,11 +38,23 @@ if (V.engine === 'piper') {
     items: lines.map((l) => ({ id: l.id, text: l.tts || l.text, ref: l.ref, out: join(raw, `${l.id}.wav`) })) };
   const r = spawnSync(PY, [join(ROOT, 'tools', 'voice', 'xtts_lines.py')], { input: JSON.stringify(job), encoding: 'utf8', stdio: ['pipe', 'pipe', 'inherit'], env: { ...process.env, TTS_HOME: join(ROOT, '.cache', 'models', 'tts') }, maxBuffer: 1 << 26 });
   if (r.status !== 0) throw new Error('xtts failed');
-} else throw new Error(`unknown voice engine ${V.engine} (piper | xtts)`);
+} else if (V.engine === 'qwen') {
+  // clone a saved voice (assets/voices/<name>.wav + .json with its transcript) for every line
+  const QPY = join(ROOT, '.tools', 'qwen', 'venv', 'bin', 'python');
+  if (!existsSync(QPY)) throw new Error('Qwen3-TTS missing – run: npm run setup');
+  const name = V.voice || 'wissen-creator', meta = join(ROOT, 'assets', 'voices', `${name}.json`);
+  if (!V.ref && !existsSync(meta)) throw new Error(`unknown voice "${name}" – see assets/voices/`);
+  const job = { lang, ref_audio: V.ref ? join(ROOT, V.ref) : join(ROOT, 'assets', 'voices', `${name}.wav`), ref_text: V.refText || JSON.parse(readFileSync(meta, 'utf8')).ref_text,
+    tries: V.tries || 4, temperature: V.temperature ?? 0.6, model: String(V.model).startsWith('Qwen/') ? V.model : undefined,
+    items: lines.map((l) => ({ id: l.id, text: l.tts || l.text, ref: l.ref, out: join(raw, `${l.id}.wav`) })) };
+  const r = spawnSync(QPY, [join(ROOT, 'tools', 'voice', 'qwen_lines.py')], { input: JSON.stringify(job), encoding: 'utf8', stdio: ['pipe', 'pipe', 'inherit'],
+    env: { ...process.env, HF_HOME: join(ROOT, '.cache', 'models', 'hf') }, maxBuffer: 1 << 26 });
+  if (r.status !== 0) throw new Error('qwen failed');
+} else throw new Error(`unknown voice engine ${V.engine} (qwen | piper | xtts)`);
 
 // ---------- master: EQ, gentle compression, loudness ----------
 for (const l of lines) {
-  const af = `aresample=48000:resampler=soxr,highpass=f=75,equalizer=f=200:t=q:w=0.9:g=${V.warmth},equalizer=f=3400:t=q:w=1.4:g=-1.5,` +
+  const af = `${V.tempo && V.tempo !== 1 ? `atempo=${V.tempo},` : ''}aresample=48000:resampler=soxr,highpass=f=75,equalizer=f=200:t=q:w=0.9:g=${V.warmth},equalizer=f=3400:t=q:w=1.4:g=-1.5,` +
     'equalizer=f=8000:t=q:w=1.5:g=-2.2,acompressor=threshold=-22dB:ratio=2.2:attack=10:release=150:makeup=2,loudnorm=I=-19:TP=-3:LRA=7';
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', join(raw, `${l.id}.wav`), '-af', af, '-ar', '48000', '-ac', '1', join(p.voice, `${l.id}.wav`)]);
 }

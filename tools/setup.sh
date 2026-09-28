@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One-time setup: npm run setup [-- --xtts]
-#   Node deps, Piper (TTS) + default voice, Python venv with Whisper (word timings / checks),
+#   Node deps, Qwen3-TTS (narration), Piper (TTS) + default voice, Python venv with Whisper (word timings / checks),
 #   optional XTTS-v2 (expressive voices, Coqui Public Model License = non-commercial), assets.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -50,6 +50,13 @@ if [[ $XTTS == 1 ]]; then
   "$UV" pip install -q -p .venv/bin/python --index-strategy unsafe-best-match --extra-index-url https://download.pytorch.org/whl/cpu \
     "${TORCH[@]}" coqui-tts "transformers>=4.56,<5"
 fi
+
+say "qwen3-tts (narration voices, Apache-2.0) – models download on first use (~4 GB)"
+[[ -d .tools/qwen/venv ]] || "$UV" venv -q -p 3.12 .tools/qwen/venv
+if [[ "$(uname -s)" == Linux ]]; then
+  "$UV" pip install -q -p .tools/qwen/venv/bin/python torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+fi
+"$UV" pip install -q -p .tools/qwen/venv/bin/python qwen-tts==0.1.1 faster-whisper soundfile
 
 say "assets (instrument samples, sound effects, fonts)"
 node tools/fetch-assets.mjs
