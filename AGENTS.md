@@ -1,10 +1,12 @@
-# AGENTS.md – from one prompt to a finished paper video
+# AGENTS.md – from one prompt to a finished video
 
-reelsmith turns a prompt ("a video for X, in which Y happens") into a **paper-craft stop-motion
-video of any kind**: stories and fairytales, birthday/anniversary greetings, invitations,
-explainers, product or brand clips, trip recaps, social posts. Hand-cut paper pieces with cast
-shadows, pop-ups, puppets moving on twos, paper typography, optional narration, sampled music and
-real paper foley – all rendered as a pure JavaScript canvas animation into `build/_<slug>/`.
+reelsmith turns a prompt ("a video for X, in which Y happens") into a finished video of any kind:
+stories and fairytales, greetings, invitations, explainers, product clips, recaps, social posts –
+rendered as a pure JavaScript canvas animation into `build/_<slug>/`, in one of two styles:
+- **paper** – papercraft stop-motion: hand-cut pieces with cast shadows, pop-ups, puppets moving on
+  twos, paper typography, paper foley.
+- **clean** – smooth motion graphics: flat sketch-note boards, ink lines that draw themselves, bold
+  headlines, handwriting, desktop windows with a gliding mouse pointer ([docs/style-clean.md](docs/style-clean.md)).
 
 Work autonomously: the user wants a finished, reviewed video, not a draft.
 Quality bar: professional and handmade, in the tone the prompt asks for (cute, festive, calm, punchy …).
@@ -13,7 +15,7 @@ Exact APIs and defaults: [`docs/`](docs/README.md).
 ## 0. Prerequisites (once per machine)
 
 `npm run setup` (add `-- --xtts` for expressive/female XTTS voices). If `assets/samples/manifest.json`,
-`.tools/piper/piper` or `.venv/bin/python` are missing, run it.
+`.tools/qwen/venv/bin/python`, `.tools/piper/piper` or `.venv/bin/python` are missing, run it.
 
 ## 1. Understand the prompt → decide
 
@@ -23,10 +25,11 @@ Then decide (defaults in brackets) and note the decisions for the final report:
 
 | Decision | Options |
 |---|---|
-| frame | `book` = storybook on a table (stories, fairytales, sentimental gifts) · `stage` = full-bleed paper diorama (greetings, invitations, explainers, promos, social) |
+| style | `paper` = handmade, warm, playful (stories, gifts, kids) · `clean` = modern motion graphics (knowledge/"Wusstest du"-TikToks, tutorials, UI/product demos, anything that should look sleek) [paper] |
+| frame | clean: `board` (flat sketch-note surface) · `desktop` (computer screen) · paper: `book` = storybook on a table (stories, fairytales, sentimental gifts) · `stage` = full-bleed paper diorama (greetings, invitations, explainers, promos, social) |
 | formats | `16:9`, `9:16` or both [both] – 9:16 for social/phone, 16:9 for TV/YouTube |
 | narration | yes (storytelling, explaining) or no (music + on-screen text) [yes for stories] |
-| subtitles | narrated social/muted viewing: `{ "style": "words" }` (9:16, word by word) · `{ "style": "bold" }` (16:9 captions) · `true` (storybook strip) |
+| subtitles | narrated social/muted viewing – paper: `{ "style": "words" }` (9:16, word by word) · `{ "style": "bold" }` (16:9) · `true` (storybook strip); clean: `{ "style": "karaoke" }` (3-word chunks, spoken word yellow) · `"lines"` (16:9) |
 | file size | `"render": { "targetMB": N }` when there is a size limit (e.g. GitHub ≤ 20 MB, TikTok) |
 | language | of voice and all on-screen text [German] |
 | length | [45–60 s]; social cuts 15–30 s |
@@ -38,14 +41,15 @@ Ask the user only if something essential is truly ambiguous (e.g. a missing date
 ## 2. Create the project
 
 ```
-npm run new -- <slug> --title "…" [--frame stage] [--formats 9:16]
+npm run new -- <slug> --title "…" [--style clean] [--frame stage] [--formats 9:16]
 ```
 Edit `stories/<slug>/`:
 - `story.json` – settings, `cast`, `scenes` (id + bars), `lines` → [docs/story-format.md](docs/story-format.md)
 - `scenes.js` – one `VG.scene(id, { bg, fg, light?, camera?, sfx? })` per scene → [docs/scenes.md](docs/scenes.md)
 - `score.js` – `VG.compose = (M, T) => { … }` → [docs/audio.md](docs/audio.md)
 
-The template is a small storybook; replace its content completely – it only demonstrates the techniques.
+The templates (`_template` storybook, `_template-clean` explainer) only demonstrate the techniques –
+replace their content completely. Clean style: follow [docs/style-clean.md](docs/style-clean.md).
 
 ### Script
 - Narrated: 1–2 short sentences per line, ~6–9 lines per minute. The last line lands the point/emotion.
@@ -57,7 +61,7 @@ The template is a small storybook; replace its content completely – it only de
 - Narrated scene ≈ narration + 1.5 s. Text-only scene: give the eye ~1 s per 3 words + 1 s.
 - Book: `intro.bars` (closed book) + cover opening; stage: starts on the first scene.
 
-### Visual rules (details in docs/scenes.md)
+### Visual rules – paper (details in docs/scenes.md; clean: docs/style-clean.md → Proven patterns)
 - Lay out relative to `st.L.w`/`st.L.h` so every format works; in the 16:9 book keep faces/text off the gutter (x = 0).
 - Draw every standing thing through `VG.pop(…, st.pop(at))` – it rises in, and folds away on transitions.
 - Sync to narration with `st.word('vo2', 'Tom')`: names/objects pop when spoken.
@@ -66,8 +70,10 @@ The template is a small storybook; replace its content completely – it only de
 
 ## 3. Voice (skip when there is no narration)
 
-`npm run voice -- <slug>` (`--only vo3,vo5` to redo lines). Piper = reliable warm male storyteller;
-XTTS = expressive, female and male voices (`npm run cast -- <slug> --gender female` to choose).
+`npm run voice -- <slug>` (`--only vo3,vo5` to redo lines). Qwen3-TTS (`"engine": "qwen"`) = natural German/English
+with a saved voice (`assets/voices/`, default `wissen-creator`: friendly male explainer) – use it for clean videos
+and whenever German must sound natural. Piper = reliable warm male storyteller; XTTS = expressive, female and male
+voices (`npm run cast -- <slug> --gender female` to choose).
 **Read the report**: `sim < 0.9` or a wrong transcript = fix `tts` spelling and redo. Check names,
 loanwords and every number/date in the transcript. Details: [docs/audio.md](docs/audio.md).
 
@@ -103,11 +109,11 @@ build/_<slug>/
   voice/                             narration per line, voice.json, raw takes, casting samples
   review/                            stills and contact sheets
 ```
-Templates (`stories/_template`) are never rendered into `build/`.
+Templates (`stories/_template`, `stories/_template-clean`) are never rendered into `build/`.
 
 ## Conventions
 
-- Style-agnostic engine in `engine/*.js`; the paper look in `engine/styles/paper/` (future styles: [docs/extending.md](docs/extending.md)).
+- Style-agnostic engine in `engine/*.js`; looks in `engine/styles/paper/` and `engine/styles/clean/` (new styles: [docs/extending.md](docs/extending.md)).
 - Deterministic: never `Math.random()` – use `VG.rng(seed)`, `VG.hash`.
 - Don't commit `build/`, downloaded `assets/*` folders, `.cache/`, `.tools/`, `.venv/`.
 - Licences: `assets/CREDITS.md` (CC BY-SA samples: celesta, music_box, choir_aahs; XTTS non-commercial).

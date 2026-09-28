@@ -4,9 +4,9 @@ Flags go after the slug. All outputs of a video land in its own folder `build/_<
 
 | Tool | Flags | Output / purpose | Typical time |
 |---|---|---|---|
-| `setup` | `--xtts` | Node deps, Piper + voice, `.venv` (Whisper; XTTS), assets | 2–15 min first time |
+| `setup` | `--xtts` | Node deps, Qwen3-TTS (`.tools/qwen/venv`, models on first use), Piper + voice, `.venv` (Whisper; XTTS), assets | 2–15 min first time |
 | `fetch-assets` | `--only samples\|sfx\|fonts`, `--force`, `--jobs N` | `assets/{samples,sfx,fonts}` from pinned sources (sha256-checked) | ~10 min cold, 0 s warm |
-| `new` | `--title`, `--frame book\|stage`, `--formats 16:9,9:16` | `stories/<slug>/` from the template | instant |
+| `new` | `--title`, `--style paper\|clean`, `--frame book\|stage\|board\|desktop`, `--formats 16:9,9:16` | `stories/<slug>/` from `_template` (paper) or `_template-clean` | instant |
 | `voice` | `--only vo1,vo2` | `voice/<id>.wav`, `voice/voice.json`, report with transcripts | piper s; xtts minutes |
 | `cast` | `--gender female\|male`, `--speakers "A,B"`, `--text` | `voice/cast/*.wav` + ranked table | ~40 s per voice |
 | `timeline` | – | scene/line table, fit problems (exit 2) | instant |

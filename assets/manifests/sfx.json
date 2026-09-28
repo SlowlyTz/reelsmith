@@ -588,6 +588,362 @@
       "original_title": "Wind blowing in the bush on the top of Kitt Peak mountain. (USA, Arizona)",
       "license": "CC0 1.0 (public domain dedication)",
       "notes": "30s excerpt (18-48s): gentle mountain wind through bushes, no mic buffeting. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_click_1.wav",
+      "category": "ui_click",
+      "start": 0,
+      "duration": 0.01,
+      "channels": 1,
+      "fadeInMs": 0,
+      "fadeOutMs": 3,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/click_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: click_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Tiny crisp UI tick/click. Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_click_2.wav",
+      "category": "ui_click",
+      "start": 0,
+      "duration": 0.01,
+      "channels": 1,
+      "fadeInMs": 0,
+      "fadeOutMs": 3,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/click_004.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: click_004.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Tiny soft UI click. Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_tick.wav",
+      "category": "ui_tick",
+      "start": 0,
+      "duration": 0.0232,
+      "channels": 1,
+      "fadeInMs": 0,
+      "fadeOutMs": 5,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/tick_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: tick_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short tick (counters, checkmarks). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_pop.wav",
+      "category": "ui_pop",
+      "start": 0,
+      "duration": 0.0432,
+      "channels": 2,
+      "fadeInMs": 0,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/select_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: select_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Soft select pop (element appears). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_pluck_1.wav",
+      "category": "ui_pluck",
+      "start": 0,
+      "duration": 0.1024,
+      "channels": 2,
+      "fadeInMs": 0,
+      "fadeOutMs": 15,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/pluck_001.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: pluck_001.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Bright pluck (label/box appears). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_pluck_2.wav",
+      "category": "ui_pluck",
+      "start": 0,
+      "duration": 0.1645,
+      "channels": 2,
+      "fadeInMs": 0,
+      "fadeOutMs": 20,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/pluck_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: pluck_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Lower pluck. Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_drop.wav",
+      "category": "ui_drop",
+      "start": 0,
+      "duration": 0.191,
+      "channels": 2,
+      "fadeInMs": 0,
+      "fadeOutMs": 20,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/drop_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: drop_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Soft drop (element lands). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_open.wav",
+      "category": "ui_open",
+      "start": 0,
+      "duration": 0.4179,
+      "channels": 1,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/maximize_004.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: maximize_004.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Rising swipe (window/card opens). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_close.wav",
+      "category": "ui_close",
+      "start": 0,
+      "duration": 0.4179,
+      "channels": 1,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/minimize_004.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: minimize_004.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Falling swipe (window/card closes). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_confirm.wav",
+      "category": "ui_confirm",
+      "start": 0,
+      "duration": 0.539,
+      "channels": 1,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/confirmation_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: confirmation_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Positive two-note confirmation. Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_glass.wav",
+      "category": "ui_glass",
+      "start": 0,
+      "duration": 0.2784,
+      "channels": 1,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/glass_001.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: glass_001.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Glassy ping (highlight, idea). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_switch.wav",
+      "category": "ui_switch",
+      "start": 0,
+      "duration": 0.6109,
+      "channels": 2,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/switch_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: switch_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Switch toggle. Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_question.wav",
+      "category": "ui_question",
+      "start": 0,
+      "duration": 0.3325,
+      "channels": 1,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/question_002.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: question_002.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Questioning blip (question mark). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "ui_error.wav",
+      "category": "ui_error",
+      "start": 0,
+      "duration": 0.1026,
+      "channels": 2,
+      "fadeInMs": 2,
+      "fadeOutMs": 8,
+      "source": {
+        "page": "https://kenney.nl/assets/interface-sounds",
+        "url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+        "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "zipEntry": "Audio/error_004.ogg"
+      },
+      "author": "Kenney (kenney.nl)",
+      "original_title": "Interface Sounds: error_004.ogg",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Short error buzz (wrong, cross). Source: Kenney Interface Sounds pack (OGG). Processed: 20 Hz highpass (DC), faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "mouse_click.wav",
+      "category": "mouse_click",
+      "start": 0.365,
+      "duration": 0.2,
+      "channels": 2,
+      "fadeInMs": 2,
+      "fadeOutMs": 20,
+      "source": {
+        "page": "https://freesound.org/s/678248/",
+        "url": "https://cdn.freesound.org/previews/678/678248_7806746-hq.mp3",
+        "sha256": "a8d0369a986abe53067b160e0fe902e1a6ebfdfc5ce443ac67a37185fc04462d"
+      },
+      "author": "Pixeliota",
+      "original_title": "Mouse Click Sound.mp3",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Real mouse button click, press + release (0.2 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "pen_write_1.wav",
+      "category": "pen_write",
+      "start": 4.9,
+      "duration": 3.1,
+      "channels": 2,
+      "fadeInMs": 40,
+      "fadeOutMs": 150,
+      "source": {
+        "page": "https://freesound.org/s/234016/",
+        "url": "https://cdn.freesound.org/previews/234/234016_3735801-hq.mp3",
+        "sha256": "f2baff5a54992ed15505ae7060bef9e78eee963b2b4a9a075feb70e73cacdf7c"
+      },
+      "author": "rivernile7",
+      "original_title": "Writing On Paper.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Pen writing on paper, continuous (3.1 s) – use dur to match the handwriting. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "pen_write_2.wav",
+      "category": "pen_write",
+      "start": 10.4,
+      "duration": 3.0,
+      "channels": 2,
+      "fadeInMs": 40,
+      "fadeOutMs": 150,
+      "source": {
+        "page": "https://freesound.org/s/234016/",
+        "url": "https://cdn.freesound.org/previews/234/234016_3735801-hq.mp3",
+        "sha256": "f2baff5a54992ed15505ae7060bef9e78eee963b2b4a9a075feb70e73cacdf7c"
+      },
+      "author": "rivernile7",
+      "original_title": "Writing On Paper.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Pen writing on paper, second take (3.0 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "marker_circle.wav",
+      "category": "marker",
+      "start": 0.0,
+      "duration": 0.55,
+      "channels": 2,
+      "fadeInMs": 10,
+      "fadeOutMs": 60,
+      "source": {
+        "page": "https://freesound.org/s/321137/",
+        "url": "https://cdn.freesound.org/previews/321/321137_2816253-hq.mp3",
+        "sha256": "a200882f7f22661a7331e6569bcd57c5a128fd497d92c43fa9f321f46d3b6ee9"
+      },
+      "author": "elliott.klein",
+      "original_title": "Sharpie marker drawing circle 01.wav",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Marker drawing a quick circle (0.55 s). Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
+    },
+    {
+      "file": "marker_line.wav",
+      "category": "marker",
+      "start": 3.0,
+      "duration": 1.0,
+      "channels": 2,
+      "fadeInMs": 10,
+      "fadeOutMs": 80,
+      "source": {
+        "page": "https://freesound.org/s/371330/",
+        "url": "https://cdn.freesound.org/previews/371/371330_6912397-hq.mp3",
+        "sha256": "6355e644b8992b219cc93e515c43ca3dc281200799b634dd7520c1353495b715"
+      },
+      "author": "TubbsMedia",
+      "original_title": "Marker Circle.WAV",
+      "license": "CC0 1.0 (public domain dedication)",
+      "notes": "Marker stroke (1.0 s) – lines, arrows, underlines. Source: Freesound HQ preview (MP3) re-encoded to 48 kHz/16-bit WAV. Processed: 20 Hz highpass (DC), trimmed, faded, peak-normalized to -3 dBFS."
     }
   ]
 }

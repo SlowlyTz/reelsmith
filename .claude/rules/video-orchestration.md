@@ -13,8 +13,8 @@ workflow in the main chat.
    date), ask in the chat before spawning. Subagents cannot ask the user.
 3. **Unique slugs.** Pick a short kebab-case slug per video. It must be unique: not in `stories/`,
    not in `build/`, not used by a running subagent.
-4. **Setup runs once, here.** Check `assets/samples/manifest.json`, `.tools/piper/piper` and
-   `.venv/bin/python`. If anything is missing, run `npm run setup` yourself before spawning. Add
+4. **Setup runs once, here.** Check `assets/samples/manifest.json`, `.tools/qwen/venv/bin/python`,
+   `.tools/piper/piper` and `.venv/bin/python`. If anything is missing, run `npm run setup` yourself before spawning. Add
    `-- --xtts` if a video needs a female or expressive voice. Never run setup while subagents are
    running.
 

@@ -13,10 +13,11 @@ at the same time in this repo, so the rules below are strict.
 ## Workflow
 
 Follow `AGENTS.md` and `.claude/skills/make-video/SKILL.md` step by step. Read both first, plus
-`docs/README.md` and `stories/_template/`. Differences:
+`docs/README.md` and the template of the chosen style (`stories/_template/` paper,
+`stories/_template-clean/` clean – then also `docs/style-clean.md`). Differences:
 
 - **Setup is the orchestrator's job.** Only check that `assets/samples/manifest.json`,
-  `.tools/piper/piper` and `.venv/bin/python` exist. Never run `npm run setup` or
+  `.tools/qwen/venv/bin/python`, `.tools/piper/piper` and `.venv/bin/python` exist. Never run `npm run setup` or
   `npm run fetch-assets`. If something is missing (including XTTS when you need it), stop and
   report it.
 - **Use the given slug.** Run `npm run new -- <slug> …` with exactly that slug. Never pick another
@@ -32,7 +33,7 @@ Follow `AGENTS.md` and `.claude/skills/make-video/SKILL.md` step by step. Read b
 ## Hard rules
 
 - Write only in `stories/<slug>/` and `build/_<slug>/`.
-- Never edit `engine/`, `audio/`, `tools/`, `docs/`, `assets/`, `stories/_template/` or any other
+- Never edit `engine/`, `audio/`, `tools/`, `docs/`, `assets/`, `stories/_template*/` or any other
   shared file. Every parallel render reads them. If shared code is truly broken, stop and report
   the problem with `file:line`.
 - **No git:** no `git commit`, `git add`, `git stash`, `git checkout`, branches or worktrees.

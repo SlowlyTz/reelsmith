@@ -7,7 +7,7 @@ if (!slug) { console.error('usage: npm run timeline -- <slug>'); process.exit(1)
 const { story, voice } = loadStory(slug);
 const { T, check } = timeline(story, voice);
 const r = check(T);
-console.log(`${story.title} – ${story.frame || 'book'}, ${T.bpm} BPM, bar ${T.bar.toFixed(2)}s, total ${T.end.toFixed(2)}s`);
+console.log(`${story.title} – ${T.style} / ${T.frame}, ${T.bpm} BPM, bar ${T.bar.toFixed(2)}s, total ${T.end.toFixed(2)}s`);
 console.table(r.table);
 const missing = (story.lines || []).filter((l) => !voice[l.id]).map((l) => l.id);
 if (missing.length) console.log(`no voice yet for: ${missing.join(', ')} (npm run voice -- ${slug})`);

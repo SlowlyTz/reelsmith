@@ -13,17 +13,20 @@
 <!--ENGINE-->
 <script src="core.js"></script>
 <script src="timeline.js"></script>
-<script src="styles/paper/paper.js"></script>
-<script src="styles/paper/puppet.js"></script>
-<script src="styles/paper/props.js"></script>
-<script src="styles/paper/frames/book.js"></script>
-<script src="styles/paper/frames/stage.js"></script>
-<script src="styles/paper/post.js"></script>
-<script src="styles/paper/subtitles.js"></script>
+<script src="captions.js"></script>
 <script src="runtime.js"></script>
 <script src="../audio/dsl.js"></script>
 <script src="../audio/mixer.js"></script>
 <!--/ENGINE-->
+<!--STYLES--><script>
+// visual styles (JSON): loaded on demand for story.style; tools/html.mjs inlines the one a video uses
+window.VG_STYLES = {
+  "paper": ["styles/paper/paper.js", "styles/paper/puppet.js", "styles/paper/props.js", "styles/paper/frames/book.js",
+    "styles/paper/frames/stage.js", "styles/paper/post.js", "styles/paper/subtitles.js"],
+  "clean": ["styles/clean/clean.js", "styles/clean/draw.js", "styles/clean/ui.js", "styles/clean/frames/board.js",
+    "styles/clean/frames/desktop.js", "styles/clean/post.js", "styles/clean/subtitles.js"]
+};
+</script><!--/STYLES-->
 <!--STORY-->
 <script>
 // Modes: ?story=<slug> [&format=9:16] [&mode=play|render|mix|still] [&t=12.5]
@@ -41,7 +44,12 @@
     }
     story.slug = story.slug || slug;
     if (q.get('format')) story.format = q.get('format');
-    const fams = ['20px "IM Fell English"', 'italic 20px "IM Fell English"', '20px "IM Fell English SC"', '20px "Berkshire Swash"', '20px UnifrakturMaguntia', '700 20px Caveat', '700 20px "JetBrains Mono"', '600 20px Fredoka', '700 20px Fredoka'];
+    const style = story.style || 'paper';
+    if (!VG.styles?.[style]) {
+      if (!window.VG_STYLES[style]) throw new Error(`unknown style "${style}" (available: ${Object.keys(window.VG_STYLES).join(', ')})`);
+      for (const src of window.VG_STYLES[style]) await loadScript(src);
+    }
+    const fams = VG.styles[style].fonts || [];
     await Promise.all(fams.map((f) => document.fonts.load(f, 'AaÄäÖöÜüß…').catch(() => console.warn('font missing: ' + f))));
     const T = VG.start(story, voice || {});
     const cv = document.getElementById('c'), ctx = cv.getContext('2d');

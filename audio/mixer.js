@@ -74,6 +74,7 @@
   function frameCues(T) {
     const c = [], add = (t, file, gain, o = {}) => c.push([t, file, gain, o]);
     const turns = ['page_turn_3.wav', 'page_turn_2.wav', 'page_turn_1.wav'];
+    if (T.style !== 'paper') return c;                  // other styles place their sounds in scenes / score
     if (T.frame === 'book') {
       add(T.intro.openStart - 0.55, 'book_open.wav', 0.8, { pan: 0.2 });
       T.scenes.slice(1).forEach((s, i) => { add(s.start + 0.02, turns[i % turns.length], 0.95, { pan: 0.15 }); add(s.start - 0.02, 'paper_pop_4.wav', 0.28, { pan: -0.1 }); });

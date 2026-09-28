@@ -43,6 +43,10 @@
   let GRAIN = null, GRAIN_SOFT = null;
   const paperCache = new Map();
   VG.initPaper = () => { GRAIN = makeGrain(512, 7, 1.0); GRAIN_SOFT = makeGrain(512, 11, 0.55); VG.GRAIN = GRAIN; };
+  VG.styles = VG.styles || {};
+  VG.styles.paper = { init: () => VG.initPaper(),
+    fonts: ['20px "IM Fell English"', 'italic 20px "IM Fell English"', '20px "IM Fell English SC"', '20px "Berkshire Swash"', '20px UnifrakturMaguntia',
+      '700 20px Caveat', '700 20px "JetBrains Mono"', '600 20px Fredoka', '700 20px Fredoka'] };
   // CanvasPattern of a colour with paper grain baked in; patterns follow the current transform,
   // so the texture sticks to the piece it is drawn on.
   VG.paper = (color, soft = false) => {

@@ -4,12 +4,13 @@
 {
   "title": "Lina und die Sterne",          // shown on the cover and the player
   "slug": "lina",                          // optional, defaults to the folder name
-  "lang": "de",                            // narration language (Piper model / XTTS / Whisper)
-  "style": "paper",                        // visual style (only "paper" for now)
-  "frame": "book",                         // "book" (storybook on a table) | "stage" (full-bleed diorama: greetings, promos, social …)
+  "lang": "de",                            // narration language (voice + Whisper)
+  "style": "paper",                        // "paper" (stop-motion papercraft) | "clean" (smooth motion graphics → style-clean.md)
+  "frame": "book",                         // paper: "book" (storybook on a table) | "stage" (full-bleed diorama)
+                                           // clean: "board" (flat surface) | "desktop" (wallpaper + menu bar)
   "formats": ["16:9", "9:16"],             // rendered formats; first one is the default for tools
-  "fps": 24,                               // output frame rate
-  "animFps": 12,                           // stop-motion rate for puppets/pop-ups
+  "fps": 24,                               // output frame rate (paper 24, clean 30)
+  "animFps": 12,                           // paper: stop-motion rate for puppets/pop-ups (clean: = fps)
   "music": { "bpm": 100, "beatsPerBar": 3, "key": "F" },
   "voice": { … },                          // see below
   "book": {                                // frame "book" only
@@ -59,18 +60,27 @@ Check word timing with `npm run snap -- <slug> --format 9:16 <word start + 0.05>
 In the page, `VG.subtitleWords()` lists every displayed word with its times and
 `VG.subtitleChunks(ctx)` the bold caption chunks – handy for checks.
 
+## clean style fields
+
+`theme`, `brand`, `board`, `desktop`, `fadeTo` and the clean caption styles (`karaoke`, `words`,
+`lines`) are described in [style-clean.md](style-clean.md).
+
 ## voice
 
 | Field | Default | Notes |
 |---|---|---|
-| `engine` | `piper` | `piper` or `xtts` |
+| `engine` | `piper` | `qwen` (Qwen3-TTS, cloned voice – best German), `piper` or `xtts` |
+| `voice` | `wissen-creator` | qwen: saved voice in `assets/voices/<name>.wav/.json` |
+| `ref`, `refText` | – | qwen: own reference clip (path in the repo) and its exact transcript instead of `voice` |
+| `tempo` | 1.0 | speed-up/slow-down during mastering, pitch kept (e.g. 1.08 for a fast explainer) |
+| `temperature` | 0.6 | qwen sampling (lower = steadier delivery) |
 | `model` | `de_DE-thorsten-high` | Piper voice name; downloaded on first use from rhasspy/piper-voices |
 | `lengthScale` | 1.12 | Piper pace (higher = slower; 1.05–1.2 for storytelling) |
 | `noiseScale`, `noiseW` | 0.62, 0.85 | Piper variation |
 | `sentenceSilence` | 0.45 | Piper pause between sentences (s) |
 | `speaker` | `Uta Obando` | XTTS built-in speaker (see `npm run cast`) |
 | `speed` | 1.0 | XTTS pace |
-| `tries` | 8 | XTTS takes per phrase until Whisper confirms it |
+| `tries` | 8 (xtts) / 4 (qwen) | takes per phrase (xtts) or line (qwen) until Whisper confirms it; the best take wins |
 | `warmth` | 2 | low-mid EQ boost in dB during mastering |
 
 ## scenes

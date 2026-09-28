@@ -17,7 +17,8 @@ Put this line in video descriptions, end credits or release notes:
 > sengjinn, hdfreema, danner, Sotiris_Laskaris, khenshom, Areti18 and felix.blume, and
 > Kenney.nl (CC0). Fonts: IM Fell English by Igino Marini, Berkshire Swash by Astigmatic,
 > UnifrakturMaguntia by j. 'mach' wust, Caveat by Impallari Type, JetBrains Mono by JetBrains,
-> Fredoka by Milena Brandão and Hafontia (SIL Open Font License 1.1).
+> Fredoka by Milena Brandão and Hafontia, Montserrat by Julieta Ulanovsky et al., Inter by Rasmus Andersson
+> (SIL Open Font License 1.1).
 
 ## Instrument samples (`assets/samples/`)
 
@@ -69,8 +70,8 @@ fade-out; notes that are not capped get a 30 ms fade-out instead.
 
 All sounds are **CC0 1.0 Universal** (public domain dedication). No attribution is required,
 but credit is given here anyway. The Freesound sounds use the public HQ preview MP3 from
-each sound page, which can be downloaded without logging in. The Kenney sound is
-`Audio/bookClose.ogg` from the RPG Audio pack zip.
+each sound page, which can be downloaded without logging in. The Kenney sounds come from the
+RPG Audio pack (`Audio/bookClose.ogg`) and the Interface Sounds pack (`ui_*.wav`) zips.
 
 Processing, with the exact settings for each file in `assets/manifests/sfx.json`:
 - 20 Hz highpass to remove DC; `night_ambience_2` also gets a 120 Hz highpass to remove rumble.
@@ -104,6 +105,11 @@ Processing, with the exact settings for each file in `assets/manifests/sfx.json`
 | yawn_2.wav | Yawn (Male) | DrFortyseven | https://freesound.org/s/240139/ |
 | yawn_3.wav | Yawning 2 | njjjjjjjjjjjjjjjjjjjjjjjj | https://freesound.org/s/566324/ |
 | yawn_4.wav | Male Yawn | aldenroth2 | https://freesound.org/s/272030/ |
+| mouse_click.wav | Mouse Click Sound.mp3 | Pixeliota | https://freesound.org/s/678248/ |
+| pen_write_1.wav, pen_write_2.wav | Writing On Paper.wav | rivernile7 | https://freesound.org/s/234016/ |
+| marker_circle.wav | Sharpie marker drawing circle 01.wav | elliott.klein | https://freesound.org/s/321137/ |
+| marker_line.wav | Marker Circle.WAV | TubbsMedia | https://freesound.org/s/371330/ |
+| ui_click_1/2, ui_tick, ui_pop, ui_pluck_1/2, ui_drop, ui_open, ui_close, ui_confirm, ui_glass, ui_switch, ui_question, ui_error | Interface Sounds pack | Kenney (kenney.nl) | https://kenney.nl/assets/interface-sounds |
 | waves_soft_1.wav | Calm ocean waves | SamsterBirdies | https://freesound.org/s/578524/ |
 | waves_soft_2.wav | Gentle small waves lapping on shore.wav | Alex_hears_things | https://freesound.org/s/352356/ |
 | forest_ambience_1.wav | sfx_amb_forest_spring_afternoon-01.wav | bajko | https://freesound.org/s/385280/ |
@@ -133,3 +139,5 @@ The fonts are copied unchanged from the Google Fonts repository
 | Caveat[wght].ttf | Caveat (variable) | Impallari Type | Copyright 2014 The Caveat Project Authors |
 | JetBrainsMono[wght].ttf | JetBrains Mono (variable) | JetBrains, Philipp Nurullin, Konstantin Bulenkov | Copyright 2020 The JetBrains Mono Project Authors |
 | Fredoka[wdth,wght].ttf | Fredoka (variable) | Milena Brandão, Hafontia | Copyright 2016 The Fredoka Project Authors |
+| Montserrat[wght].ttf | Montserrat (variable) | Julieta Ulanovsky et al. | Copyright 2011 The Montserrat Project Authors |
+| Inter[opsz,wght].ttf | Inter (variable) | Rasmus Andersson | Copyright 2020 The Inter Project Authors |

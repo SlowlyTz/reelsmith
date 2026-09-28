@@ -11,10 +11,11 @@
     const T = (VG.T = VG.timeline.build(story, voice));
     const { W, H } = VG.FORMATS[story.format || '16:9'];
     VG.W = W; VG.H = H;
-    const style = story.style || 'paper';
-    if (style !== 'paper') throw new Error(`unknown style "${style}" (available: paper)`);
-    VG.initPaper();
-    const frame = (VG.frameImpl = VG.frames[story.frame || 'book'](story, T));
+    const S = VG.styles?.[T.style];
+    if (!S) throw new Error(`style "${T.style}" is not loaded (engine/page.html → VG_STYLES)`);
+    S.init?.();
+    if (!VG.frames[T.frame]) throw new Error(`style "${T.style}" has no frame "${T.frame}" (available: ${Object.keys(VG.frames).join(', ')})`);
+    const frame = (VG.frameImpl = VG.frames[T.frame](story, T));
     frame.init();
     VG.layout = frame.layout;
     VG.camKeys = cameraKeys(T, frame);
@@ -27,7 +28,7 @@
   VG.sceneState = (k, t) => {
     const T = VG.T, sc = T.scenes[k], lt = t - sc.openAt;
     const exitAt = k + 1 < T.scenes.length ? T.scenes[k + 1].start : T.frame === 'book' ? T.outro.closeStart : Infinity;
-    const fold = 1 - ease.inOut(win(t, exitAt, T.turnDur * 0.42));
+    const fold = VG.frameImpl.fold === false ? 1 : 1 - ease.inOut(win(t, exitAt, T.turnDur * 0.42));   // clean frames crossfade instead
     const line = (id) => { const l = T.lines[id]; if (!l) throw new Error(`unknown line ${id}`); return l; };
     // time (scene-local) at which a word of a narration line starts; w = index or text
     const word = (id, w, end = false) => {
@@ -43,6 +44,7 @@
     };
     return { t, lt, k, id: sc.id, fold, L: VG.layout, dur: sc.exitAt - sc.openAt,
       pop: (at, dur) => VG.popK(lt, at, dur) * fold,
+      prog: (at, dur = 1) => clamp((lt - at) / dur, 0, 1),
       line: (id) => ({ start: line(id).start - sc.openAt, end: line(id).speechEnd - sc.openAt }),
       word, since: (id, w) => lt - word(id, w) };
   };
@@ -50,15 +52,15 @@
   // Camera keyframes in world coordinates from the frame's intro/outro views and each scene's
   // `camera: [[lt, x, y, zoom], ...]` (content coordinates, lt relative to the scene opening).
   function cameraKeys(T, frame) {
-    const keys = [], cv = frame.closedView, oz = frame.openView.z;
+    const keys = [], cv = frame.closedView, oz = frame.openView.z, drift = frame.drift ?? 0.04;
     if (cv) { keys.push([0, cv.x, cv.y, cv.z], [T.intro.openStart - 0.1, cv.x, cv.y, cv.z + 0.035]); }
     T.scenes.forEach((s, k) => {
-      const def = VG.defs[s.id] || {}, cam = def.camera || [[0, 0, 0, oz], [s.exitAt - s.openAt - 0.2, 0, 0, oz + 0.04]];
+      const def = VG.defs[s.id] || {}, cam = def.camera || [[0, 0, 0, oz], [s.exitAt - s.openAt - 0.2, 0, 0, oz + drift]];
       for (const [lt, x, y, z] of cam) { const [wx, wy] = frame.toWorld(x, y); keys.push([s.openAt + lt, wx, wy, z]); }
     });
     const O = T.outro;
     if (cv) keys.push([O.closeStart + O.closeDur + 0.5, cv.x, cv.y, cv.z + 0.09], [O.end, cv.x, cv.y + 20, cv.z + 0.15]);
-    else { const last = keys[keys.length - 1]; keys.push([O.closeStart + 0.4, last[1], last[2], last[3]], [O.end, last[1], last[2], last[3] + 0.04]); }
+    else { const last = keys[keys.length - 1]; keys.push([O.closeStart + 0.4, last[1], last[2], last[3]], [O.end, last[1], last[2], last[3] + drift]); }
     return keys.sort((a, b) => a[0] - b[0]);
   }
   VG.camera = (t) => {

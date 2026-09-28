@@ -5,27 +5,31 @@
 // A scene "starts" when the transition into it starts; its content is fully open at `openAt`
 // and scene-local time `lt` counts from there.
 (function (root) {
-  const TURN = { book: 1.05, stage: 1.0 }, OPEN_FRAC = 0.8;
+  const TURN = { book: 1.05, stage: 1.0, board: 0.45, desktop: 0.45 }, OPEN_FRAC = 0.8;
+  // per style: default frame, output fps and animation rate (paper moves on twos, clean is fluid)
+  const STYLE = { paper: { frame: 'book', fps: 24, animFps: 12 }, clean: { frame: 'board', fps: 30, animFps: 0 } };
 
   function build(story, voice = {}) {
     const bpm = story.music?.bpm ?? 100, beats = story.music?.beatsPerBar ?? 3;
     const beat = 60 / bpm, bar = beat * beats;
-    const frame = story.frame || 'book', turnDur = TURN[frame];
-    const introBars = story.intro?.bars ?? (frame === 'book' ? 1 : 0);
+    const style = story.style || 'paper', D = STYLE[style] || STYLE.paper;
+    const frame = story.frame || D.frame, turnDur = TURN[frame] ?? 0.6, book = frame === 'book';
+    const introBars = story.intro?.bars ?? (book ? 1 : 0);
     const outroBars = story.outro?.bars ?? 3;
-    const T = { bpm, beat, bar, frame, turnDur, fps: story.fps || 24, animFps: story.animFps || 12, scenes: [], lines: {} };
+    const fps = story.fps || D.fps;
+    const T = { bpm, beat, bar, style, frame, turnDur, fps, animFps: story.animFps || D.animFps || fps, scenes: [], lines: {} };
 
     let t = introBars * bar;
-    T.intro = { start: 0, end: t, openStart: t, openDur: frame === 'book' ? 1.25 : 0.9 };
+    T.intro = { start: 0, end: t, openStart: t, openDur: book ? 1.25 : style === 'paper' ? 0.9 : 0.3 };
     story.scenes.forEach((s, i) => {
       const start = t, dur = s.bars * bar;
       const trans = i === 0 ? T.intro.openDur : turnDur;
       T.scenes.push({ id: s.id, index: i, start, end: start + dur, transDur: trans, openAt: start + trans * OPEN_FRAC, exitAt: start + dur });
       t += dur;
     });
-    const outroStart = t, closeDur = frame === 'book' ? 1.25 : 0.9;
+    const outroStart = t, closeDur = book ? 1.25 : style === 'paper' ? 0.9 : 0.5;
     T.outro = { start: outroStart, closeStart: outroStart, closeDur,
-      sticker: story.outro?.sticker !== undefined ? story.outro.sticker : frame === 'book' ? 'heart' : null,
+      sticker: story.outro?.sticker !== undefined ? story.outro.sticker : book ? 'heart' : null,
       stickerAt: outroStart + Math.ceil((closeDur + 0.4) / bar) * bar,
       fadeDur: 1.4, end: outroStart + outroBars * bar };
     T.outro.fadeStart = T.outro.end - T.outro.fadeDur - 0.1;

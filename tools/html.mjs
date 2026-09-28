@@ -16,6 +16,11 @@ if (!existsSync(audio)) { console.error(`mix first: npm run mix -- ${slug}`); pr
 const eng = join(ROOT, 'engine'), page = readFileSync(join(eng, 'page.html'), 'utf8'), css = readFileSync(join(eng, 'page.css'), 'utf8');
 const storyFiles = ['scenes.js', 'score.js'].filter((f) => existsSync(join(p.story, f)));
 const engineScripts = [...page.matchAll(/<script src="([^"]+)"><\/script>/g)].map((m) => m[1]);
+// only the style this video uses (engine/page.html → VG_STYLES)
+const styleName = story.style || 'paper';
+const styleScripts = JSON.parse(page.match(/window\.VG_STYLES = (\{[\s\S]*?\});/)[1])[styleName];
+if (!styleScripts) { console.error(`unknown style ${styleName}`); process.exit(1); }
+const stylesBlock = /<!--STYLES-->[\s\S]*?<!--\/STYLES-->/;
 const b64 = (f) => readFileSync(f).toString('base64');
 const data = (fmt, audioSrc) => `window.STORY = ${JSON.stringify({ ...story, format: fmt })};\nwindow.VOICE = ${JSON.stringify(voice)};\nwindow.AUDIO_SRC = ${JSON.stringify(audioSrc)};\n`;
 
@@ -23,6 +28,7 @@ const data = (fmt, audioSrc) => `window.STORY = ${JSON.stringify({ ...story, for
 let html = page.replace('<link rel="stylesheet" href="page.css">',
   `<style>\n${css.replace(/url\("\.\.\/assets\/fonts\/([^"]+)"\)/g, (_, f) => `url(data:font/ttf;base64,${b64(join(ROOT, 'assets', 'fonts', f))})`)}</style>`);
 html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, f) => `<script>\n${readFileSync(join(eng, f), 'utf8')}\n</script>`);
+html = html.replace(stylesBlock, () => styleScripts.map((f) => `<script>\n${readFileSync(join(eng, f), 'utf8')}\n</script>`).join('\n'));
 html = html.replace('<!--STORY-->', `<script>${data(format, `data:audio/mp4;base64,${b64(audio)}`)}</script>\n` +
   storyFiles.map((f) => `<script>\n${readFileSync(join(p.story, f), 'utf8')}\n</script>`).join('\n') + '\n<!--STORY-->');
 const single = join(p.build, `${slug}${fmtTag(format)}.html`);
@@ -35,12 +41,13 @@ const put = (rel, content) => { const f = join(p.web, rel); ensureDir(dirname(f)
 put('css/page.css', css.replace(/url\("\.\.\/assets\/fonts\//g, 'url("../fonts/'));
 cpSync(join(ROOT, 'assets', 'fonts'), join(p.web, 'fonts'), { recursive: true });
 ensureDir(join(p.web, 'audio')); cpSync(audio, join(p.web, 'audio', 'soundtrack.m4a'));
-for (const f of engineScripts) put(join('js', f.startsWith('../') ? f.slice(3) : join('engine', f)), readFileSync(join(eng, f)));
+for (const f of [...engineScripts, ...styleScripts]) put(join('js', f.startsWith('../') ? f.slice(3) : join('engine', f)), readFileSync(join(eng, f)));
 put('js/story/story-data.js', `// story settings and measured narration timings of "${story.title}"\n${data(story.formats[0], 'audio/soundtrack.m4a')}` +
   `if (new URLSearchParams(location.search).get('format')) window.STORY.format = new URLSearchParams(location.search).get('format');\n`);
 for (const f of storyFiles) put(join('js', 'story', f), readFileSync(join(p.story, f)));
 let index = page.replace('href="page.css"', 'href="css/page.css"')
   .replace(/<script src="([^"]+)"><\/script>/g, (_, f) => `<script src="js/${f.startsWith('../') ? f.slice(3) : 'engine/' + f}"></script>`)
+  .replace(stylesBlock, () => styleScripts.map((f) => `<script src="js/engine/${f}"></script>`).join('\n'))
   .replace('<!--STORY-->', ['story-data.js', ...storyFiles].map((f) => `<script src="js/story/${f}"></script>`).join('\n') + '\n<!--STORY-->');
 put('index.html', index);
 console.log(`${p.web}/index.html (+ css, js, fonts, audio)`);

@@ -6,7 +6,7 @@
 stories/<slug>/story.json ─┐
 build/_<slug>/voice/voice.json ─┼─► engine/timeline.js ──► T (absolute timeline)
                                │
-stories/<slug>/scenes.js ──────┼─► engine/runtime.js ──► frame (book | stage) ──► post ──► canvas
+stories/<slug>/scenes.js ──────┼─► engine/runtime.js ──► style frame (book | stage | board | desktop) ──► post ──► canvas
 stories/<slug>/score.js ───────┴─► audio/dsl.js ──► audio/mixer.js (OfflineAudioContext) ──► soundtrack.wav
 ```
 
@@ -20,7 +20,8 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 |---|---|
 | `engine/core.js` | `VG` namespace: math, easing, `rng/hash/strSeed`, colours, `VG.FORMATS` |
 | `engine/timeline.js` | UMD; `build(story, voice)` → `T`, `check(T)` → fit report. Used by browser and Node (via `vm`) |
-| `engine/runtime.js` | `VG.scene()`, `VG.start()`, scene state (`st`), camera keyframes, `VG.render(ctx, t)` |
+| `engine/captions.js` | style-agnostic caption timing: display words aligned to Whisper words, phrases, chunks (`VG.captions`) |
+| `engine/runtime.js` | `VG.scene()`, `VG.start()` (initialises `VG.styles[story.style]`), scene state (`st`), camera keyframes, `VG.render(ctx, t)` |
 | `engine/styles/paper/paper.js` | grain textures, hand-cut shapes (`VG.S`, `VG.G`), `VG.piece`, pop-ups, jitter, text |
 | `engine/styles/paper/puppet.js` | jointed puppets configured by `story.cast` |
 | `engine/styles/paper/props.js` | scenery & prop library, sticker |
@@ -28,7 +29,8 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 | `engine/styles/paper/frames/stage.js` | full-bleed paper stage, sliding-sheet transitions |
 | `engine/styles/paper/post.js` | lamp grade, vignette, exposure flicker, film grain, fades |
 | `engine/styles/paper/subtitles.js` | `VG.subtitles` – strip / bold captions / word-by-word, aligned to Whisper word times |
-| `engine/page.html` + `page.css` | loads everything; modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
+| `engine/styles/clean/*` | style "clean": `clean.js` (theme, motion, text), `draw.js` (self-drawing lines/shapes), `ui.js` (pointer, window, sheet), frames `board`/`desktop`, `post.js`, `subtitles.js` – see style-clean.md |
+| `engine/page.html` + `page.css` | loads the engine, then the scripts of `story.style` from `VG_STYLES` (only one style per page, so styles may reuse names like `VG.post`); modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
 | `audio/dsl.js` | score language (`VG.scoreDSL(T)`, `VG.chord`, `VG.note`) |
 | `audio/mixer.js` | offline mix: samples, narration + ducking, sfx, reverb, master |
 | `tools/lib/common.mjs` | paths, story loading, static server (+ `/upload/`), Chromium launch, frame grab |

@@ -22,10 +22,15 @@ in `engine/styles/paper/frames/`, add the script to `engine/page.html`, and (if 
 `audio/mixer.js → frameCues`. Scenes must only depend on `st.L`.
 
 ## A visual style
-Create `engine/styles/<style>/` implementing the same surface the stories use (`VG.piece`, `VG.print`,
-`VG.pop`, props, `VG.puppet`, frames, `VG.post`), register it in `engine/page.html`, and extend the
-check in `VG.start` (`engine/runtime.js`). Stories select it with `"style": "<style>"`; keep the prop
-names identical so stories stay portable between styles.
+Create `engine/styles/<style>/` and list its scripts under `VG_STYLES` in `engine/page.html` (only the
+style of the current story is loaded, so names like `VG.post` may repeat across styles). A style must:
+- register `VG.styles.<style> = { init(), fonts: [...] }` (fonts are preloaded before the first frame),
+- define at least one frame in `VG.frames` (`fold: false` to skip pop-up folding, `drift: 0` for a static camera),
+- define `VG.popK(lt, at, dur)` (used by `st.pop`), `VG.post(ctx, t, W, H, T)` and `VG.subtitles(ctx, t)`
+  (caption timing comes from `VG.captions`, engine/captions.js),
+- add defaults in `engine/timeline.js → STYLE` (default frame, fps, animFps) and `TURN` (transition length),
+- skip or add frame sounds in `audio/mixer.js → frameCues` (non-paper styles place sounds in scenes/score).
+Add a template `stories/_template-<style>/` and teach `tools/new.mjs --style` about it. Example: `clean`.
 
 ## An instrument or sound
 Add recipes to `assets/manifests/samples.json` or `sfx.json` (pinned URL + sha256 + processing), run

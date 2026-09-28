@@ -7,8 +7,9 @@ open these files when you need exact APIs, defaults or known pitfalls.
 |---|---|
 | [architecture.md](architecture.md) | need the big picture: modules, data flow, coordinate & time systems |
 | [story-format.md](story-format.md) | write or change `story.json` (every field + default) |
-| [scenes.md](scenes.md) | write `scenes.js`: scene API, layout, pop-ups, camera, sync, proven patterns |
-| [library.md](library.md) | look for a drawing function, prop, puppet pose or cast option |
+| [scenes.md](scenes.md) | write `scenes.js`: scene API, layout, pop-ups, camera, sync, proven patterns (paper) |
+| [style-clean.md](style-clean.md) | make a clean motion-graphics video (`"style": "clean"`): helpers, captions, sounds, patterns |
+| [library.md](library.md) | look for a paper drawing function, prop, puppet pose or cast option |
 | [audio.md](audio.md) | work on narration, music (`score.js`) or the mix / sound effects |
 | [tools.md](tools.md) | run a CLI: flags, outputs, runtimes |
 | [quality.md](quality.md) | review before delivery: checklist + known failure modes |

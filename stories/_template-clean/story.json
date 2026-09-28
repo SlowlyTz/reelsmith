@@ -1,0 +1,80 @@
+{
+  "title": "Warum ist Gähnen ansteckend?",
+  "lang": "de",
+  "style": "clean",
+  "frame": "board",
+  "theme": "sand",
+  "formats": [
+    "9:16"
+  ],
+  "fps": 30,
+  "music": {
+    "bpm": 120,
+    "beatsPerBar": 2,
+    "key": "F"
+  },
+  "voice": {
+    "engine": "qwen",
+    "voice": "wissen-creator",
+    "tempo": 1.08
+  },
+  "subtitles": {
+    "style": "karaoke"
+  },
+  "brand": {
+    "name": "reelsmith.",
+    "handle": "@reelsmith"
+  },
+  "mix": {
+    "music": -12,
+    "sfx": -6
+  },
+  "outro": {
+    "bars": 1
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bars": 5
+    },
+    {
+      "id": "hirn",
+      "bars": 6
+    },
+    {
+      "id": "notiz",
+      "bars": 5
+    },
+    {
+      "id": "suche",
+      "bars": 6
+    }
+  ],
+  "lines": [
+    {
+      "id": "vo1",
+      "scene": "hook",
+      "at": 0.1,
+      "text": "Warum gähnst du, wenn andere gähnen? Das ist kein Zufall."
+    },
+    {
+      "id": "vo2",
+      "scene": "hirn",
+      "at": 0.1,
+      "text": "Forscher vermuten: Gähnen kühlt dein Gehirn, wie ein kleiner Ventilator."
+    },
+    {
+      "id": "vo3",
+      "scene": "notiz",
+      "at": 0.1,
+      "text": "Und es steckt an, weil dein Gehirn andere Menschen unbewusst nachmacht."
+    },
+    {
+      "id": "vo4",
+      "scene": "suche",
+      "at": 0.1,
+      "text": "Mehr dazu? Such einfach nach Spiegelneuronen.",
+      "sub": "Mehr dazu? Such einfach nach *Spiegelneuronen.*"
+    }
+  ]
+}

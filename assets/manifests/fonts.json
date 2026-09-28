@@ -66,6 +66,22 @@
       "designer": "Milena Brandão, Hafontia",
       "copyright": "Copyright 2016 The Fredoka Project Authors (https://github.com/hafontia/Fredoka-One)",
       "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8"
+    },
+    {
+      "file": "Montserrat[wght].ttf",
+      "src": "montserrat/Montserrat[wght].ttf",
+      "family": "Montserrat (variable weight)",
+      "designer": "Julieta Ulanovsky et al.",
+      "copyright": "Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)",
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
+    },
+    {
+      "file": "Inter[opsz,wght].ttf",
+      "src": "inter/Inter[opsz,wght].ttf",
+      "family": "Inter (variable optical size and weight)",
+      "designer": "Rasmus Andersson",
+      "copyright": "Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
     }
   ]
 }

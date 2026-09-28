@@ -9,6 +9,7 @@ Pipeline per line: engine → `build/_<slug>/voice/raw/<id>.wav` → mastering (
 
 | Engine | Strengths | Watch out |
 |---|---|---|
+| `qwen` (Qwen3-TTS 1.7B, Apache-2.0) | natural German and English, clones a saved voice (`voice: "wissen-creator"`), 1–4 takes per line picked by Whisper | ~5 s compute per second of audio on CPU; no speed control in the model → use `tempo` |
 | `piper` (`de_DE-thorsten-high`) | fast (RTF ~0.15), deterministic, warm male storyteller | prints phonemes – check stress of names/loanwords |
 | `xtts` (XTTS-v2 studio speakers) | expressive, female + male voices | babbles after short phrases / garbles words → handled phrase-by-phrase with Whisper verification + trimming; ~10–40 s per phrase on CPU; non-commercial licence |
 
@@ -16,6 +17,10 @@ Pronunciation fixes go into `tts` (keep `text` correct): phonetic spelling (`Emi
 `Läptop`, `Mielo` for a clear long i), numbers and dates as words, commas for pauses.
 Verification: `sim` ≥ 0.95 and a transcript that matches; dates/numbers must be exactly right.
 For XTTS lines containing numbers set `ref` (e.g. `"Seit dem 14. April 2024."`) so verification compares digits.
+
+Voices (qwen): a voice is a reference clip + its exact transcript in `assets/voices/<name>.wav/.json`
+(`wissen-creator`: friendly, natural male German explainer). New voices can be designed from a
+description with the Qwen VoiceDesign model and saved there (the .json records instruct, seed, temperature).
 
 Casting (XTTS): `npm run cast -- <slug> [--gender female|male] [--speakers "A,B"]` → table of
 `lang_p` (native-sounding), `sim` (intelligible), `f0` (pitch, ~200–230 Hz female, ~100–130 Hz male),
@@ -71,6 +76,7 @@ Automatic cues: book open/close, page turns, pop-ups on every scene opening, sta
 | ambience (30 s) | waves_soft_1/2, forest_ambience_1/2, night_ambience_1/2 (crickets), city_distant_1/2, wind_soft_1 |
 | voice | yawn_1 (2.4, big exaggerated male yawn) · yawn_2 (3.3, inhale then loud 'aaah-hm' from ~1.6 s) · yawn_3 (2.6, higher, sustained) · yawn_4 (1.25, short) – vary with `rate` 0.9–1.15 |
 | other | typing_soft_1 (6 s, pause at start → `offset: 0.7`), typing_soft_2 (6.4 s) |
+| clean / UI | mouse_click (0.2, real click) · pen_write_1/2 (3 s pen on paper – set `dur`) · marker_circle (0.55) · marker_line (1.0) · ui_click_1/2 · ui_tick · ui_pop · ui_pluck_1/2 · ui_drop · ui_open · ui_close · ui_confirm · ui_glass · ui_switch · ui_question · ui_error (Kenney, 0.01–0.6 s) |
 | procedural | `synth:boom` (5.5 s deep impact: sub drop + crack + rumble – explosions, big reveals) · `synth:whoosh` (1.2 s, moves L→R) · `synth:riser` (3 s swell peaking at its end – start it 3 s before the hit) · `synth:sub` (3.2 s low drone hit) |
 
 Place sounds per scene (`sfx: [[lt, file, gain, opts]]`, lt relative to the scene opening) or at absolute
