@@ -39,15 +39,17 @@ window.VG_STYLES = {
     if (!story) {
       story = await (await fetch(`../stories/${slug}/story.json`)).json();
       voice = await fetch(`../build/_${slug}/voice/voice.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-      await loadScript(`../stories/${slug}/scenes.js`);
-      await loadScript(`../stories/${slug}/score.js`).catch(() => {});
     }
     story.slug = story.slug || slug;
     if (q.get('format')) story.format = q.get('format');
     const style = story.style || 'paper';
-    if (!VG.styles?.[style]) {
+    if (!VG.styles?.[style]) {   // the style first: scenes.js may read its helpers (VG.S, VG.G …) when it loads
       if (!window.VG_STYLES[style]) throw new Error(`unknown style "${style}" (available: ${Object.keys(window.VG_STYLES).join(', ')})`);
       for (const src of window.VG_STYLES[style]) await loadScript(src);
+    }
+    if (!window.STORY) {
+      await loadScript(`../stories/${slug}/scenes.js`);
+      await loadScript(`../stories/${slug}/score.js`).catch(() => {});
     }
     const fams = VG.styles[style].fonts || [];
     await Promise.all(fams.map((f) => document.fonts.load(f, 'AaÄäÖöÜüß…').catch(() => console.warn('font missing: ' + f))));
