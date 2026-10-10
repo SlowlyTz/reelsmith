@@ -1,6 +1,5 @@
 # generated videos, frames, review sheets, narration
-build/*
-!build/.gitkeep
+build/
 
 # downloaded / processed assets (npm run fetch-assets)
 assets/samples/
