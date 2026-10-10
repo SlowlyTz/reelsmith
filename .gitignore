@@ -16,3 +16,6 @@ node_modules/
 
 .DS_Store
 *.log
+
+# local secrets (API keys)
+.env
