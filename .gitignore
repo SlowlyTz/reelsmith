@@ -18,3 +18,6 @@ node_modules/
 
 # local secrets (API keys)
 .env
+
+# personal stories (npm run new -- <slug> --private) – never committed
+private/

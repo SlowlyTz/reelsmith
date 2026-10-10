@@ -3,14 +3,14 @@
 ## Data flow
 
 ```
-stories/<slug>/story.json ─┐
+stories/<slug>/story.json ─┐      (or private/stories/<slug>/ – gitignored personal videos)
 build/_<slug>/voice/voice.json ─┼─► engine/timeline.js ──► T (absolute timeline)
                                │
 stories/<slug>/scenes.js ──────┼─► engine/runtime.js ──► style frame (book | stage | board | desktop) ──► post ──► canvas
 stories/<slug>/score.js ───────┴─► audio/dsl.js ──► audio/mixer.js (OfflineAudioContext) ──► soundtrack.wav
 ```
 
-Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The Node tools
+Everything visual runs in a browser page: `engine/page.html?story=<slug>&dir=<story folder>`. The Node tools
 (`tools/*.mjs`) open that page in headless Chromium to take stills, render frames or mix audio.
 `tools/html.mjs` inlines the same page into one standalone file.
 
@@ -33,7 +33,8 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>`. The N
 | `engine/page.html` + `page.css` | loads the engine, then the scripts of `story.style` from `VG_STYLES` (only one style per page, so styles may reuse names like `VG.post`); modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
 | `audio/dsl.js` | score language (`VG.scoreDSL(T)`, `VG.chord`, `VG.note`) |
 | `audio/mixer.js` | offline mix: samples, narration + ducking, sfx, reverb, master |
-| `tools/lib/common.mjs` | paths, story loading, static server (+ `/upload/`), Chromium launch, frame grab |
+| `tools/lib/common.mjs` | paths (`storyRel(slug)`: public `stories/` or private `private/stories/`), story loading, `.env` loading, static server (+ `/upload/`), Chromium launch, frame grab |
+| `tools/voice/elevenlabs.mjs` | ElevenLabs TTS (key from `.env`), take cache in `.cache/elevenlabs/`, voice lookup, casting, credits |
 
 ## Timeline model (`T`)
 

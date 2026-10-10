@@ -11,8 +11,12 @@ workflow in the main chat.
 1. **One video = one subagent.** Split the request into individual videos.
 2. **Ask first if needed.** If something essential is ambiguous (AGENTS.md §1, e.g. a missing
    date), ask in the chat before spawning. Subagents cannot ask the user.
+   - **Voice engine is always asked** unless the user already said it: ElevenLabs or Qwen TTS.
+     With ElevenLabs, let the user pick the voice (send samples from `tools/voice/elevenlabs.mjs` /
+     `npm run cast -- <slug> --engine elevenlabs`) and pass engine + voice name to the subagent.
+   - **Private or public:** personal videos go to `private/stories/<slug>/` (`--private`). Tell the subagent.
 3. **Unique slugs.** Pick a short kebab-case slug per video. It must be unique: not in `stories/`,
-   not in `build/`, not used by a running subagent.
+   not in `private/stories/`, not in `build/` (except casting samples you made for this video), not used by a running subagent.
 4. **Setup runs once, here.** Check `assets/samples/manifest.json`, `.tools/qwen/venv/bin/python`,
    `.tools/piper/piper` and `.venv/bin/python`. If anything is missing, run `npm run setup` yourself before spawning. Add
    `-- --xtts` if a video needs a female or expressive voice. Never run setup while subagents are
@@ -32,7 +36,8 @@ workflow in the main chat.
   - Use `subagent_type: "video-maker"`.
   - **Pass no `model` parameter**, because it would override the agent's model.
   - **Pass no `isolation`.** A worktree lacks `.venv`, `.tools` and `.cache`.
-- **Prompt:** the user's request for this video verbatim, plus the slug and the workers.
+- **Prompt:** the user's request for this video verbatim, plus the slug, the workers, the voice
+  engine + voice, and `--private` if the story must stay out of git.
 
 ## Verify model and effort right after the start (mandatory)
 

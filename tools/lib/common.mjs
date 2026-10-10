@@ -12,9 +12,13 @@ export const PY = join(ROOT, '.venv', 'bin', 'python');
 // Every video gets its own folder build/_<slug>/ holding everything: videos, players, web export,
 // audio, narration and review images.
 export const buildDir = (slug) => `_${slug}`;
+// Stories live in stories/<slug>/ (committed) or private/stories/<slug>/ (gitignored, for personal
+// videos); a private story wins if both exist. storyRel = path from the repo root, as the page loads it.
+export const PRIVATE = join(ROOT, 'private', 'stories');
+export const storyRel = (slug) => (existsSync(join(PRIVATE, slug, 'story.json')) ? `private/stories/${slug}` : `stories/${slug}`);
 export function paths(slug) {
   const build = join(ROOT, 'build', buildDir(slug));
-  return { story: join(ROOT, 'stories', slug), build, audio: join(build, 'audio'), voice: join(build, 'voice'),
+  return { story: join(ROOT, storyRel(slug)), build, audio: join(build, 'audio'), voice: join(build, 'voice'),
     review: join(build, 'review'), web: join(build, 'web'), frames: join(build, 'frames') };
 }
 export const fmtTag = (format) => (format === '9:16' ? '_9x16' : '');
@@ -36,6 +40,16 @@ let TL = null;
 export function timeline(story, voice) {
   if (!TL) { const box = {}; box.globalThis = box; vm.runInNewContext(readFileSync(join(ROOT, 'engine', 'timeline.js'), 'utf8'), box); TL = box.VG.timeline; }
   return { T: TL.build(story, voice), check: TL.check };
+}
+
+// KEY=value lines from .env in the repo root (gitignored) → process.env, without overriding the shell
+export function loadEnv() {
+  const f = join(ROOT, '.env');
+  if (!existsSync(f)) return;
+  for (const l of readFileSync(f, 'utf8').split('\n')) {
+    const m = l.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/);
+    if (m && m[2] && process.env[m[1]] == null) process.env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
+  }
 }
 
 export function ensureDir(d) { mkdirSync(d, { recursive: true }); return d; }
@@ -79,7 +93,7 @@ export async function openStory(b, port, slug, { format, mode = 'render' } = {})
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs.push(m.text()); else if (m.type() === 'warn') console.warn('  page:', m.text()); });
-  const q = new URLSearchParams({ story: slug, mode }); if (format) q.set('format', format);
+  const q = new URLSearchParams({ story: slug, dir: storyRel(slug), mode }); if (format) q.set('format', format);
   await page.goto(`http://127.0.0.1:${port}/engine/page.html?${q}`);
   await page.waitForFunction('window.VG_ERROR || (window.VG && window.VG.ready)', { timeout: 300000 });
   const err = await page.evaluate(() => window.VG_ERROR);

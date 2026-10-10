@@ -31,7 +31,8 @@
 ```
 
 Line fields: `text` = the words (subtitles, meaning) · `tts` = what the voice reads · `ref` = transcript form for
-verification (digits) · `sub` = subtitle text if it must differ from `text` (`*word*` = accent colour; `false` = no subtitle).
+verification (digits) · `sub` = subtitle text if it must differ from `text` (`*word*` = accent colour; `false` = no subtitle) ·
+`take` = elevenlabs take number (0 default; 1, 2, … for a new take of just that line – old takes stay cached).
 
 ## subtitles
 
@@ -69,8 +70,11 @@ In the page, `VG.subtitleWords()` lists every displayed word with its times and
 
 | Field | Default | Notes |
 |---|---|---|
-| `engine` | `piper` | `qwen` (Qwen3-TTS, cloned voice – best German), `piper` or `xtts` |
-| `voice` | `wissen-creator` | qwen: saved voice in `assets/voices/<name>.wav/.json` |
+| `engine` | `piper` | `elevenlabs` (cloud, most natural, costs credits), `qwen` (Qwen3-TTS, local cloned voice – best local German), `piper` or `xtts`. **The user chooses** between `elevenlabs` and `qwen` (AGENTS.md §1) |
+| `voice` | `wissen-creator` / `Will` | qwen: saved voice in `assets/voices/<name>.wav/.json`; elevenlabs: voice name (`"Lily"`) or voice id – free plan: premade voices only |
+| `model` (elevenlabs) | `eleven_multilingual_v2` | or `eleven_v3` (more expressive), `eleven_flash_v2_5` (half the credits) |
+| `stability`, `similarity`, `style`, `speed`, `speakerBoost` | 0.5, 0.75, 0.15, 1.0, true | elevenlabs voice settings: lower stability = more emotional, higher style = more expressive, speed 0.7–1.2 |
+| `context` | true | elevenlabs: pass the neighbouring lines as `previous_text`/`next_text` for a coherent delivery |
 | `ref`, `refText` | – | qwen: own reference clip (path in the repo) and its exact transcript instead of `voice` |
 | `tempo` | 1.0 | speed-up/slow-down during mastering, pitch kept (e.g. 1.08 for a fast explainer) |
 | `temperature` | 0.6 | qwen sampling (lower = steadier delivery) |

@@ -1,5 +1,5 @@
 // Narration: npm run voice -- <slug> [--only vo2,vo3]
-// Generates every line of story.json with Qwen3-TTS, Piper or XTTS (story.voice.engine), masters it and
+// Generates every line of story.json with ElevenLabs, Qwen3-TTS, Piper or XTTS (story.voice.engine), masters it and
 // measures word timings with Whisper -> build/_<slug>/voice/<id>.wav + voice.json.
 // Always read the report: a low "sim" means the transcript differs from the text (mispronounced
 // or garbled word) – fix the line's "tts" spelling and regenerate just that line with --only.
@@ -7,6 +7,7 @@ import { existsSync, writeFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { ROOT, PY, loadStory, ensureDir, duration, args } from './lib/common.mjs';
+import { elevenlabsLines, credits } from './voice/elevenlabs.mjs';
 
 const a = args(), slug = a._[0];
 if (!slug) { console.error('usage: npm run voice -- <slug> [--only vo1,vo2]'); process.exit(1); }
@@ -50,7 +51,12 @@ if (V.engine === 'piper') {
   const r = spawnSync(QPY, [join(ROOT, 'tools', 'voice', 'qwen_lines.py')], { input: JSON.stringify(job), encoding: 'utf8', stdio: ['pipe', 'pipe', 'inherit'],
     env: { ...process.env, HF_HOME: join(ROOT, '.cache', 'models', 'hf') }, maxBuffer: 1 << 26 });
   if (r.status !== 0) throw new Error('qwen failed');
-} else throw new Error(`unknown voice engine ${V.engine} (qwen | piper | xtts)`);
+} else if (V.engine === 'elevenlabs') {
+  // cloud TTS, cached per take in .cache/elevenlabs (tools/voice/elevenlabs.mjs)
+  const sent = await elevenlabsLines({ voice: story.voice, lang, lines, all: story.lines || [], raw });
+  const c = await credits().catch(() => null);
+  console.log(`elevenlabs: ${sent} characters sent${c ? ` · ${c.used}/${c.limit} credits used this period (${c.tier})` : ''}`);
+} else throw new Error(`unknown voice engine ${V.engine} (elevenlabs | qwen | piper | xtts)`);
 
 // ---------- master: EQ, gentle compression, loudness ----------
 for (const l of lines) {

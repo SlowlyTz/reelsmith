@@ -20,8 +20,11 @@ Follow `AGENTS.md` and `.claude/skills/make-video/SKILL.md` step by step. Read b
   `.tools/qwen/venv/bin/python`, `.tools/piper/piper` and `.venv/bin/python` exist. Never run `npm run setup` or
   `npm run fetch-assets`. If something is missing (including XTTS when you need it), stop and
   report it.
-- **Use the given slug.** Run `npm run new -- <slug> …` with exactly that slug. Never pick another
-  one, and never touch another slug's files.
+- **Use the given slug.** Run `npm run new -- <slug> …` with exactly that slug (add `--private` when
+  the orchestrator says so). Never pick another one, and never touch another slug's files.
+- **Use the given voice engine and voice** (`elevenlabs` or `qwen`). Never switch engines on your own;
+  if ElevenLabs fails (key, credits, voice not allowed), stop and report. ElevenLabs costs credits:
+  generate all lines once, then redo only failing lines (`"take": n` + `--only`).
 - **Render with the given workers**, e.g. `npm run video -- <slug> --workers <n>`.
 - **Nobody can answer questions.** You run in the background. Decide ambiguous points with the
   AGENTS.md defaults and list the assumptions in your report.
@@ -32,7 +35,7 @@ Follow `AGENTS.md` and `.claude/skills/make-video/SKILL.md` step by step. Read b
 
 ## Hard rules
 
-- Write only in `stories/<slug>/` and `build/_<slug>/`.
+- Write only in your story folder (`stories/<slug>/` or `private/stories/<slug>/`) and `build/_<slug>/`.
 - Never edit `engine/`, `audio/`, `tools/`, `docs/`, `assets/`, `stories/_template*/` or any other
   shared file. Every parallel render reads them. If shared code is truly broken, stop and report
   the problem with `file:line`.

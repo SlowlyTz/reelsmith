@@ -29,7 +29,7 @@ window.VG_STYLES = {
 </script><!--/STYLES-->
 <!--STORY-->
 <script>
-// Modes: ?story=<slug> [&format=9:16] [&mode=play|render|mix|still] [&t=12.5]
+// Modes: ?story=<slug> [&dir=private/stories/<slug>] [&format=9:16] [&mode=play|render|mix|still] [&t=12.5]
 (async function () {
   const VG = window.VG, q = new URLSearchParams(location.search), mode = q.get('mode') || (q.has('t') ? 'still' : 'play');
   const loadScript = (src) => new Promise((ok, fail) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => fail(new Error('cannot load ' + src)); document.head.appendChild(s); });
@@ -37,7 +37,8 @@ window.VG_STYLES = {
     let story = window.STORY, voice = window.VOICE;
     const slug = q.get('story') || story?.slug;
     if (!story) {
-      story = await (await fetch(`../stories/${slug}/story.json`)).json();
+      const dir = q.get('dir') || `stories/${slug}`;   // or private/stories/<slug> (tools pass it)
+      story = await (await fetch(`../${dir}/story.json`)).json();
       voice = await fetch(`../build/_${slug}/voice/voice.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
     }
     story.slug = story.slug || slug;
@@ -48,8 +49,9 @@ window.VG_STYLES = {
       for (const src of window.VG_STYLES[style]) await loadScript(src);
     }
     if (!window.STORY) {
-      await loadScript(`../stories/${slug}/scenes.js`);
-      await loadScript(`../stories/${slug}/score.js`).catch(() => {});
+      const dir = q.get('dir') || `stories/${slug}`;
+      await loadScript(`../${dir}/scenes.js`);
+      await loadScript(`../${dir}/score.js`).catch(() => {});
     }
     const fams = VG.styles[style].fonts || [];
     await Promise.all(fams.map((f) => document.fonts.load(f, 'AaÄäÖöÜüß…').catch(() => console.warn('font missing: ' + f))));

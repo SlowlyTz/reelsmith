@@ -2,10 +2,14 @@
 // Speaks one sentence with many built-in XTTS voices and ranks them. Pick by: lang_p≈1 and sim≈1
 // (clean native speech), pitch fitting the role, higher melody = more expressive storytelling.
 // Then set story.voice = { "engine": "xtts", "speaker": "<name>" }.
+// ElevenLabs: npm run cast -- <slug> --engine elevenlabs [--speakers "Will,Brian"] [--text "…"] speaks the
+// sentence with calm premade voices (costs credits once, then cached) → the user listens and picks one;
+// then story.voice = { "engine": "elevenlabs", "voice": "<name>" }.
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { ROOT, PY, loadStory, ensureDir, args } from './lib/common.mjs';
+import { elevenlabsCast } from './voice/elevenlabs.mjs';
 
 const FEMALE = ['Claribel Dervla', 'Daisy Studious', 'Gracie Wise', 'Tammie Ema', 'Alison Dietlinde', 'Ana Florence', 'Annmarie Nele', 'Asya Anara', 'Brenda Stern', 'Gitta Nikolina',
   'Henriette Usha', 'Sofia Hellen', 'Tammy Grit', 'Tanja Adelina', 'Vjollca Johnnie', 'Nova Hogarth', 'Maja Ruoho', 'Uta Obando', 'Lidiya Szekeres', 'Chandra MacFarland',
@@ -20,6 +24,15 @@ const { story, p } = loadStory(slug);
 const speakers = a.speakers ? String(a.speakers).split(',').map((s) => s.trim()) : a.gender === 'male' ? MALE : FEMALE;
 const text = a.text || story.lines.slice(0, 2).map((l) => (l.tts || l.text).replace(/…/g, '')).join(' ');
 const outdir = ensureDir(join(p.voice, 'cast'));
+if (a.engine === 'elevenlabs') {
+  const names = a.speakers ? String(a.speakers).split(',').map((s) => s.trim()) : null;
+  const voice = story.voice?.engine === 'elevenlabs' ? story.voice : {};
+  const rows = await elevenlabsCast({ names, text, lang: story.lang || 'de', voice, outdir });
+  writeFileSync(join(outdir, 'cast.json'), JSON.stringify(rows, null, 1));
+  console.table(rows.map(({ voice, gender, accent, age, desc }) => ({ voice, gender, accent, age, desc })));
+  console.log(`samples + cast.json in ${outdir} – let the user listen and pick`);
+  process.exit(0);
+}
 console.log(`casting ${speakers.length} voices (~40 s each on CPU) with: "${text}"`);
 const r = spawnSync(PY, [join(ROOT, 'tools', 'voice', 'cast.py')], { input: JSON.stringify({ lang: story.lang || 'de', text, speakers, outdir }), encoding: 'utf8',
   stdio: ['pipe', 'pipe', 'inherit'], env: { ...process.env, TTS_HOME: join(ROOT, '.cache', 'models', 'tts') }, maxBuffer: 1 << 26 });

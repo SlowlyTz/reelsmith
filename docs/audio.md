@@ -9,6 +9,7 @@ Pipeline per line: engine → `build/_<slug>/voice/raw/<id>.wav` → mastering (
 
 | Engine | Strengths | Watch out |
 |---|---|---|
+| `elevenlabs` (cloud API) | most natural and emotional delivery, many voices, any language | needs `ELEVENLABS_API_KEY` in `.env`; costs credits (free plan ≈ 10k characters/month, only premade voices via API); takes are cached in `.cache/elevenlabs/` – re-runs are free, `"take": n` on a line forces a new take |
 | `qwen` (Qwen3-TTS 1.7B, Apache-2.0) | natural German and English, clones a saved voice (`voice: "wissen-creator"`), 1–4 takes per line picked by Whisper | ~5 s compute per second of audio on CPU; no speed control in the model → use `tempo` |
 | `piper` (`de_DE-thorsten-high`) | fast (RTF ~0.15), deterministic, warm male storyteller | prints phonemes – check stress of names/loanwords |
 | `xtts` (XTTS-v2 studio speakers) | expressive, female + male voices | babbles after short phrases / garbles words → handled phrase-by-phrase with Whisper verification + trimming; ~10–40 s per phrase on CPU; non-commercial licence |
@@ -21,6 +22,13 @@ For XTTS lines containing numbers set `ref` (e.g. `"Seit dem 14. April 2024."`) 
 Voices (qwen): a voice is a reference clip + its exact transcript in `assets/voices/<name>.wav/.json`
 (`wissen-creator`: friendly, natural male German explainer). New voices can be designed from a
 description with the Qwen VoiceDesign model and saved there (the .json records instruct, seed, temperature).
+
+Voices (elevenlabs): `"voice": "Lily"` (name or id). Free plan: only the premade voices of the account
+(`node tools/voice/elevenlabs.mjs --voices` lists them and shows the credit balance). Premade voices are
+native English speakers; `eleven_multilingual_v2` speaks German with them, but check names, numbers and the
+accent via the Whisper transcript. Calm and soft so far: Lily, Sarah, Matilda, Alice (female), Will, Brian, Eric, George (male).
+Casting: `npm run cast -- <slug> --engine elevenlabs [--speakers "Lily,Sarah"] [--text "…"]` → one sample per
+voice in `voice/cast/` – the user listens and picks (you cannot hear).
 
 Casting (XTTS): `npm run cast -- <slug> [--gender female|male] [--speakers "A,B"]` → table of
 `lang_p` (native-sounding), `sim` (intelligible), `f0` (pitch, ~200–230 Hz female, ~100–130 Hz male),

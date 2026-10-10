@@ -10,8 +10,8 @@ reviewed video in `build/_<slug>/` autonomously, following **AGENTS.md**:
 
 1. Read `AGENTS.md`, `docs/README.md` and the template of the chosen style (`stories/_template/` paper, `stories/_template-clean/` clean).
 2. Ensure setup (`assets/samples/manifest.json`, `.tools/qwen/venv/bin/python`, `.tools/piper/piper`, `.venv/bin/python`; else `npm run setup`, with `-- --xtts` for an expressive or female XTTS voice).
-3. Decide style (paper vs clean), frame, formats, narration/subtitles, language, length, music mood, ending (AGENTS.md §1). Pick a short kebab-case slug.
-4. `npm run new -- <slug> [--style clean] …`, then write `story.json`, `scenes.js`, `score.js` (paper: docs/scenes.md, docs/library.md; clean: docs/style-clean.md; audio: docs/audio.md).
+3. Decide style (paper vs clean), frame, formats, narration/subtitles, language, length, music mood, ending (AGENTS.md §1). The voice engine (ElevenLabs or Qwen) is the user's choice – ask if not given. Pick a short kebab-case slug.
+4. `npm run new -- <slug> [--style clean] [--private] …`, then write `story.json`, `scenes.js`, `score.js` (paper: docs/scenes.md, docs/library.md; clean: docs/style-clean.md; audio: docs/audio.md).
 5. Narration: `npm run voice -- <slug>`; fix every low-`sim` line with `--only`.
 6. `npm run timeline -- <slug>` until everything fits; `npm run snap -- <slug> --sheet` per format and look at every sheet; iterate.
 7. `npm run video -- <slug>`; review `build/_<slug>/review/video_sheet*` against docs/quality.md; fix and re-render.
