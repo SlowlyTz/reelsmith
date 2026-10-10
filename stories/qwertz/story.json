@@ -1,0 +1,121 @@
+{
+  "title": "Warum ist deine Tastatur nicht alphabetisch?",
+  "lang": "de",
+  "style": "clean",
+  "frame": "board",
+  "theme": "sand",
+  "formats": [
+    "9:16"
+  ],
+  "fps": 30,
+  "music": {
+    "bpm": 120,
+    "beatsPerBar": 2,
+    "key": "F"
+  },
+  "voice": {
+    "engine": "qwen",
+    "voice": "wissen-creator",
+    "tempo": 1.12
+  },
+  "subtitles": {
+    "style": "karaoke"
+  },
+  "brand": {
+    "name": "reelsmith.",
+    "handle": "@reelsmith"
+  },
+  "board": {
+    "transition": "fade",
+    "grain": 0.03
+  },
+  "mix": {
+    "music": -5,
+    "sfx": -4
+  },
+  "render": {
+    "targetMB": 40
+  },
+  "outro": {
+    "bars": 1
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bars": 4
+    },
+    {
+      "id": "hebel",
+      "bars": 10
+    },
+    {
+      "id": "sholes",
+      "bars": 8
+    },
+    {
+      "id": "tasten",
+      "bars": 8
+    },
+    {
+      "id": "heute",
+      "bars": 7
+    },
+    {
+      "id": "frage",
+      "bars": 5
+    }
+  ],
+  "lines": [
+    {
+      "id": "vo1",
+      "scene": "hook",
+      "at": 0.02,
+      "text": "Deine Tastatur ist absichtlich durcheinander. Warum?",
+      "sub": "Deine Tastatur ist *absichtlich* durcheinander. Warum?"
+    },
+    {
+      "id": "vo2",
+      "scene": "hebel",
+      "at": 0.1,
+      "text": "Alte Schreibmaschinen hatten für jeden Buchstaben einen Metallhebel."
+    },
+    {
+      "id": "vo3",
+      "scene": "hebel",
+      "at": 4.4,
+      "text": "Tippte man benachbarte Buchstaben zu schnell, verhakten sich die Hebel.",
+      "sub": "Tippte man benachbarte Buchstaben zu schnell, *verhakten* sich die Hebel."
+    },
+    {
+      "id": "vo4",
+      "scene": "sholes",
+      "at": 0.1,
+      "text": "Eine gängige Erklärung: Christopher Sholes sortierte die Tasten um, damit häufige Paare weit auseinanderliegen.",
+      "tts": "Eine gängige Erklärung: Christopher Schohls sortierte die Tasten um, damit häufige Paare weit auseinanderliegen."
+    },
+    {
+      "id": "vo5",
+      "scene": "tasten",
+      "at": 0.1,
+      "text": "So entstand vermutlich QWERTY. Bei uns heißt es QWERTZ, denn im Deutschen ist das Z viel häufiger als das Y.",
+      "tts": "So entstand vermutlich Kwerti. Bei uns heißt es Kwerts, denn im Deutschen ist das Zett viel häufiger als das Üpsilon.",
+      "sub": "So entstand vermutlich *QWERTY.* Bei uns heißt es *QWERTZ,* denn im Deutschen ist das Z viel häufiger als das Y.",
+      "ref": "So entstand vermutlich Querti. Bei uns heißt es Quertz, denn im Deutschen ist das Z viel häufiger als das Y."
+    },
+    {
+      "id": "vo6",
+      "scene": "heute",
+      "at": 0.1,
+      "text": "Heute verhakt sich nichts mehr. Wir haben das Layout einfach behalten, aus Gewohnheit.",
+      "sub": "Heute verhakt sich nichts mehr. Wir haben das Layout einfach behalten, aus *Gewohnheit.*"
+    },
+    {
+      "id": "vo7",
+      "scene": "frage",
+      "at": 0.1,
+      "text": "Tippst du mit zehn Fingern? Schreib's in die Kommentare.",
+      "sub": "Tippst du mit *zehn Fingern?* Schreib's in die Kommentare.",
+      "ref": "Tippst du mit 10 Fingern? Schreib's in die Kommentare."
+    }
+  ]
+}
