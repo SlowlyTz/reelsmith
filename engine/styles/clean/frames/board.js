@@ -24,8 +24,10 @@
 
     function drawScene(ctx, k, t) {
       const sc = VG.sceneDef(k), st = VG.sceneState(k, t);
-      if (sc.bg) sc.bg(ctx, st);
-      if (sc.fg) sc.fg(ctx, st);
+      VG.graded(ctx, sc.grade ? sc.grade(st) : null, (c) => {   // grade.js: optional per-scene colour grade
+        if (sc.bg) sc.bg(c, st);
+        if (sc.fg) sc.fg(c, st);
+      });
     }
     R.draw = (ctx, t) => {
       drawBg(ctx, W, H, B);

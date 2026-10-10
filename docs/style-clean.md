@@ -7,7 +7,7 @@ Typical use: TikTok/Reels knowledge videos ("Wusstest du …"), tutorials, produ
 
 Start from the template: `npm run new -- <slug> --style clean [--formats 9:16]` (copies
 `stories/_template-clean/`, a 4-scene explainer that shows every technique). Files:
-`engine/styles/clean/{clean,draw,ui,post,subtitles}.js`, `frames/{board,desktop}.js`.
+`engine/styles/clean/{clean,draw,ui,grade,scenery,person,post,subtitles}.js`, `frames/{board,desktop}.js`.
 
 ## story.json (clean-specific)
 
@@ -16,6 +16,7 @@ Start from the template: `npm run new -- <slug> --style clean [--formats 9:16]` 
   "style": "clean",
   "frame": "board",                 // "board" (flat surface, default) | "desktop" (wallpaper + menu bar)
   "theme": "sand",                  // "sand" (beige, ink, orange – sketch-note) | "paper" (white, blue accent) | "night" (dark)
+                                    // | "blush" (soft rose, wine-red accent – love stories, gifts)
                                     // or { "base": "sand", "accent": "#e4572e", … } to override single colours
   "fps": 30,                        // default 30; 60 is smoother (renders twice the frames)
   "music": { "bpm": 120, "beatsPerBar": 2 },   // 1-second bars → scenes can be timed to the second
@@ -92,6 +93,41 @@ All sizes are canvas units (1080-wide content); `k` = progress 0..1; `opt` field
 | `VG.button(ctx, str, x, y, k, opt)` | pill button (`press` 0..1) |
 | `VG.rrectPath(ctx, x, y, w, h, r)` | rounded-rect path for your own fills |
 
+### Colour grade (`grade.js`) – grey worlds that come alive
+A scene may add `grade: (st) => ({ … })`; bg + fg are then drawn into a layer and composited with a filter.
+| Field | Meaning |
+|---|---|
+| `sat` | saturation: 0 = black & white, 1 = untouched (animate it: `1 - st.prog(2, 3)` drains the colour) |
+| `light` | brightness offset (−0.3 = darker, gloomier) · `contrast` (1) |
+| `reveal: { x, y, r, soft, sat, light }` | soft circle (content coords) in which the scene keeps its own colour – grow `r` up to `VG.coverRadius(st.L, x, y)` to let colour spread from a point (a person, a touch, a heart) |
+
+Paint a full background in the graded scene's `bg` (the theme background underneath is not graded).
+Cost: one extra layer per graded frame (~5 ms); identity grades are skipped.
+
+### Scenery & mood (`scenery.js`)
+| Function | What it does |
+|---|---|
+| `VG.backdrop(ctx, L, ['#top', '#bottom'])` | full-surface vertical gradient (sky, mood) |
+| `VG.glow(ctx, x, y, r, color, a)` | soft radial light behind someone / a lamp / the sun |
+| `VG.cloud(ctx, x, y, s, opt)` | flat cloud; `color`, `alpha`, `seed`, `k` (pop in) |
+| `VG.rain(ctx, L, lt, opt)` | rain streaks; `n`, `speed`, `angle`, `len`, `color`, `alpha`, `area` |
+| `VG.drift(ctx, L, lt, opt)` | floating particles `kind: 'heart' \| 'petal' \| 'dot' \| 'spark'`; `n`, `colors`, `size`, `rise` (false = fall), `speed`, `sway`, `k` (fade in), `area` |
+| `VG.ecg(ctx, x1, x2, y, k, opt)` | heartbeat line drawn up to `k`; `amp` 0 = flat line (lifeless) → 1 = full beats, `h`, `period`, `offset` (scroll with `lt * 220` for a live monitor), `glow`, `fade` (tail), `head`; returns the tip point |
+| `VG.heartPath(x, y, s, side)` | SVG path of a heart; `'left'`/`'right'` = one half from the bottom tip up – two `VG.ink` lines in two colours meet as one heart |
+| `VG.flower(ctx, x, y, size, k, opt)` | flower growing from the ground point: stem draws, leaves pop, petals spring open; `kind: 'round' \| 'pointed' \| 'heart' \| 'tulip'`, `petals`, `color`, `color2`, `center`, `stem` (0 = head only), `sway`, `outline` |
+| `VG.meadow(ctx, x1, x2, y, k, opt)` | a row of flowers + grass blooming outward from `from` (x) as k → 1; `n`, `colors`, `kinds`, `size: [min, max]`, `sway: lt` (breeze), `seed` |
+
+### People (`person.js`)
+`VG.person(ctx, x, y, h, k, opt)` – flat minimalist figure standing at (x, y) (between the feet), `h` units tall,
+springing in with `k`. Returns `{ head, hand, top }` (points for speech bubbles, hearts, lines).
+| opt | Values |
+|---|---|
+| look | `skin`, `hair: 'short' \| 'long' \| 'bun' \| 'curly' \| 'none'`, `hairColor`, `shirt`, `pants`, `shoes`, `ink` (outline colour, `false` = none), `facing` (1 / −1) |
+| face | `face: 'smile' \| 'happy' (eyes closed, big smile) \| 'neutral' \| 'sad' \| 'closed'`, `blush` 0..1 |
+| motion | `lt` (idle breathing), `walk` (phase, e.g. `st.lt * 1.8`; omit to stand), `wave` 0..1, `reach` 0..1 (front arm out), `phone` 0..1 (hand at the ear), `headset` (true – calls, gaming), `lean` |
+
+Poses blend: animate `wave`/`reach`/`phone` with `st.prog(…)` or `VG.between(…)`. Keep figures ≥ 360 units tall in 9:16 so faces read on a phone.
+
 ## Captions
 
 `"subtitles": { "style": "karaoke" }` (default for clean): chunks of ≤ 3 words in heavy uppercase
@@ -117,5 +153,9 @@ Keep the music bed quiet (`mix.music` ≈ −12) under fast narration.
 - **One accent colour** for what matters (marker strokes, key words, bursts); ink for structure,
   `muted` handwriting for asides.
 - **Diagrams:** label boxes + a line that draws between them + an annotation in handwriting.
+- **Grey → colour (love stories, before/after):** grey scenes with `grade: { sat: 0, light: -0.25 }`, rain, a flat
+  `VG.ecg` line (`amp: 0`), a person with `face: 'sad'`; the turning point is a `reveal` growing from the person who
+  brings the colour, the ECG starts beating (`amp` 0 → 1), then `VG.meadow` blooms outward from them and `VG.drift`
+  hearts rise. Theme `blush`; two lines in two colours meeting as one heart (`VG.heartPath(…, 'left'/'right')`).
 - **Desktop moments:** window pops in, pointer glides to the field, text types, pointer clicks the
   button (`mouse_click` sound on the click time), results grow in.

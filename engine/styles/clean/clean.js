@@ -7,10 +7,11 @@
   const VG = window.VG, { clamp, lerp, win } = VG;
 
   // ---------- theme ----------
-  // colours used by every helper; story.theme = "sand" | "paper" | "night" or { ...overrides }
+  // colours used by every helper; story.theme = "sand" | "paper" | "blush" | "night" or { ...overrides }
   const THEMES = {
     sand: { bg: '#d3c7b3', ink: '#1f1b18', accent: '#d35d36', muted: '#7c7064', soft: '#bfb29c', paper: '#f6f1e7', card: '#ddd2c0', highlight: '#f5ee1f', shadow: 'rgba(70,52,30,0.28)' },
     paper: { bg: '#f7f5f0', ink: '#16181d', accent: '#2f6bff', muted: '#6b7280', soft: '#d9d6cf', paper: '#ffffff', card: '#ffffff', highlight: '#ffd400', shadow: 'rgba(20,24,40,0.16)' },
+    blush: { bg: '#f3e8e5', ink: '#2b2227', accent: '#8e2c42', muted: '#8b7680', soft: '#e2cfd2', paper: '#fffaf7', card: '#f1dfe1', highlight: '#e3b3c1', shadow: 'rgba(90,40,55,0.2)' },
     night: { bg: '#15171c', ink: '#f2f1ee', accent: '#ff6b4a', muted: '#9097a3', soft: '#3a3e47', paper: '#22252c', card: '#23262e', highlight: '#ffe14a', shadow: 'rgba(0,0,0,0.5)' },
   };
   VG.theme = { ...THEMES.sand };

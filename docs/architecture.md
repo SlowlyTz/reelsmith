@@ -29,7 +29,7 @@ Everything visual runs in a browser page: `engine/page.html?story=<slug>&dir=<st
 | `engine/styles/paper/frames/stage.js` | full-bleed paper stage, sliding-sheet transitions |
 | `engine/styles/paper/post.js` | lamp grade, vignette, exposure flicker, film grain, fades |
 | `engine/styles/paper/subtitles.js` | `VG.subtitles` – strip / bold captions / word-by-word, aligned to Whisper word times |
-| `engine/styles/clean/*` | style "clean": `clean.js` (theme, motion, text), `draw.js` (self-drawing lines/shapes), `ui.js` (pointer, window, sheet), frames `board`/`desktop`, `post.js`, `subtitles.js` – see style-clean.md |
+| `engine/styles/clean/*` | style "clean": `clean.js` (theme, motion, text), `draw.js` (self-drawing lines/shapes), `ui.js` (pointer, window, sheet), `grade.js` (per-scene colour grade + reveal), `scenery.js` (backgrounds, weather, particles, ECG, flowers), `person.js` (flat people), frames `board`/`desktop`, `post.js`, `subtitles.js` – see style-clean.md |
 | `engine/page.html` + `page.css` | loads the engine, then the scripts of `story.style` from `VG_STYLES` (only one style per page, so styles may reuse names like `VG.post`); modes `play`, `render`, `mix`, `still`; `tools/html.mjs` turns it into the standalone file and the `web/` folder |
 | `audio/dsl.js` | score language (`VG.scoreDSL(T)`, `VG.chord`, `VG.note`) |
 | `audio/mixer.js` | offline mix: samples, narration + ducking, sfx, reverb, master |
